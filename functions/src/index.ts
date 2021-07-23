@@ -36,10 +36,15 @@ exports.onCreateBeneficiary = firebase.firestore
       newAttendees = room.attendees;
       newAttendees.push(beneficiary.uuid);
     }
+
+    return db
+      .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
+      .doc(beneficiary.classroom.uuid)
+      .set({ attendees: newAttendees }, { merge: true });
   });
 
 /**
- *  @function onCreateSsuscription
+ *  @function onCreateSuscription
  *  when ypu create a new beneficiary, classroom object must be uptated
  * the @param enrolled list in asyncronus way
  */
