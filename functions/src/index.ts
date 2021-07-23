@@ -35,13 +35,21 @@ exports.onCreateBeneficiary = firebase.firestore
     if (room !== undefined && room.attendees.indexOf(beneficiary.uuid) !== -1) {
       newAttendees = room.attendees;
       newAttendees.push(beneficiary.uuid);
+
+      //merge object into room ansycronus
+      await db
+        .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
+        .doc(refRoom.id)
+        .set({ attendees: newAttendees }, { merge: true });
+
+      console.log(
+        'updated classroom attendees',
+        room?.idCal,
+        ' add to: ',
+        newAttendees.length
+      );
     }
 
-    //merge object into room ansycronus
-    await db
-      .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
-      .doc(beneficiary.classroom.uuid)
-      .set({ attendees: newAttendees }, { merge: true });
     return true;
   });
 
@@ -72,13 +80,19 @@ exports.onCreateSuscription = firebase.firestore
     if (room !== undefined && room.enrolled.indexOf(beneficiary.uuid) !== -1) {
       newEnrolled = room.enrolled;
       newEnrolled.push(beneficiary.uuid);
-    }
 
-    //set new list
-    await db
-      .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
-      .doc(beneficiary.classroom.uuid)
-      .set({ enrolled: newEnrolled }, { merge: true });
+      //set new list
+      await db
+        .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
+        .doc(refRoom.id)
+        .set({ enrolled: newEnrolled }, { merge: true });
+      console.log(
+        'updated classroom enrolled',
+        room?.idCal,
+        ' add to: ',
+        newEnrolled.length
+      );
+    }
 
     return true;
   });
