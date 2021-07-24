@@ -12,14 +12,13 @@ const db = admin.firestore();
  *  when ypu create a new beneficiary, classroom object must be uptated
  * the @param attendees list in asyncronus way
  */
-exports.onCreateBeneficiary = functions.firestore
+exports.onCreateConsolidated = functions.firestore
   .document(`${dbKey.act}/${dbKey.uid}/${dbKey.cvn}/{uuid}`)
   .onCreate(async (snapshot, params) => {
     //intances of beneficiary object ✍
 
     console.log('new consolidated', params.params.uuid);
     const beneficiary = iBeneficiaryConverter.fromFirestore(snapshot);
-    console.log('object ID:RUT', beneficiary.rut);
 
     //fetch selected classroom 🎬
     const refRoom = db
@@ -28,24 +27,28 @@ exports.onCreateBeneficiary = functions.firestore
       .doc(beneficiary.classroom.uuid);
     const query = await refRoom.get();
     const room = query.data();
-    console.log('room to update', room?.idCal, room?.colaborator);
 
     //update attendees list 🎭
-    if (room !== undefined && room.attendees.indexOf(beneficiary.uuid) !== -1) {
+    if (room !== undefined && room.attendees.indexOf(beneficiary.uuid) === -1) {
       room.attendees.push(beneficiary.uuid);
       //merge object into room ansycronus
       console.log(
-        'updated classroom attendees',
+        'updated attendees on:',
         room?.idCal,
         ' ✅ new amount: ',
-        room.attendees.length
+        room?.attendees.length,
+        '🆔 uuid:',
+        beneficiary.uuid
       );
+      const ref = db
+        .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
+        .doc(beneficiary.classroom.uuid);
+
+      //set database
+      await ref.set({ attendees: room?.attendees }, { merge: true });
     }
 
-    return db
-      .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
-      .doc(beneficiary.classroom.uuid)
-      .set({ attendees: room?.attendees }, { merge: true });
+    return false;
   });
 
 /**
@@ -60,7 +63,6 @@ exports.onCreateSuscription = functions.firestore
 
     console.log('new suscription', params.params.uuid);
     const beneficiary = iBeneficiaryConverter.fromFirestore(snapshot);
-    console.log('object ID:RUT', beneficiary.rut);
 
     //fetch selected classroom
     const refRoom = db
@@ -69,25 +71,28 @@ exports.onCreateSuscription = functions.firestore
       .doc(beneficiary.classroom.uuid);
     const query = await refRoom.get();
     const room = query.data();
-    console.log('room to update', room?.idCal, room?.colaborator);
 
     //update enrolled list 🎭
-    if (room !== undefined && room.enrolled.indexOf(beneficiary.uuid) !== -1) {
+    if (room !== undefined && room.enrolled.indexOf(beneficiary.uuid) === -1) {
       room.enrolled.push(beneficiary.uuid);
-
+      //set new list
       console.log(
-        'updated classroom enrolled',
+        'updated enrolled on',
         room?.idCal,
         ' ✅ new amount: ',
-        room.enrolled.length
+        room?.enrolled.length,
+        '🆔 uuid:',
+        beneficiary.uuid
       );
-    }
-    //set new list
 
-    return db
-      .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
-      .doc(beneficiary.classroom.uuid)
-      .set({ enrolled: room?.enrolled }, { merge: true });
+      const docRoom = db
+        .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
+        .doc(beneficiary.classroom.uuid);
+
+      await docRoom.set({ enrolled: room?.enrolled }, { merge: true });
+    }
+
+    return false;
   });
 
 export { functions as firebase };
