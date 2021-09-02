@@ -16,7 +16,6 @@ exports.onCreateConsolidated = functions.firestore
   .document(`${dbKey.act}/${dbKey.uid}/${dbKey.cvn}/{uuid}`)
   .onCreate(async (snapshot, params) => {
     //intances of beneficiary object ✍
-
     console.log('new consolidated', params.params.uuid);
     const beneficiary = iBeneficiaryConverter.fromFirestore(snapshot);
 
