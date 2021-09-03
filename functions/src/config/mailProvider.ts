@@ -4,6 +4,6 @@ export const provider = {
   secure: false, // true for 465, false for other ports
   auth: {
     user: 'ccamposn@minenergia.cl', // generated ethereal user
-    pass: '****', // generated ethereal password
+    pass: 'Ministerio..2020', // generated ethereal password
   },
 };
