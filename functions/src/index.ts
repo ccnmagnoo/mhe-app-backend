@@ -3,6 +3,7 @@ import * as admin from 'firebase-admin';
 import { dbKey } from './databaseKeys';
 import { iBeneficiaryConverter } from './Beneficiary.interface';
 import { iClassroomConverter } from './Classroom.interface';
+import { mailer } from './mailer';
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -90,6 +91,9 @@ exports.onCreateSuscription = functions.firestore
 
       await docRoom.set({ enrolled: room?.enrolled }, { merge: true });
     }
+
+    //mailer
+    await mailer();
 
     return false;
   });

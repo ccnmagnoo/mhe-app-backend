@@ -1,9 +1,9 @@
-import { IBeneficiary } from './Beneficiary.interface';
-import { IClassroom } from './Classroom.interface';
-import { provider } from './config/mailProvider';
+//import { IBeneficiary } from './Beneficiary.interface';
+//import { IClassroom } from './Classroom.interface';
+import { provider } from './mailProvider';
 import * as nodemailer from 'nodemailer';
 
-export async function mailer(classroom: IClassroom, beneficiary: IBeneficiary) {
+export async function mailer(/*classroom: IClassroom, beneficiary: IBeneficiary*/) {
   let transporter = nodemailer.createTransport(provider);
   try {
     let info = await transporter.sendMail({
