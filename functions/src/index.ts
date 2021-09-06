@@ -97,11 +97,16 @@ exports.onCreateSuscription = functions.firestore
     return true;
   });
 
+/**
+ * @function mailer nodemailer services to send basic
+ * information of activities to suscribed users.
+ */
 export async function mailer(
   classroom: IClassroom | undefined,
   beneficiary: IBeneficiary
 ) {
   let transporter = nodemailer.createTransport(provider);
+
   try {
     const time = classroom?.placeActivity.date;
 
