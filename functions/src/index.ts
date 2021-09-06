@@ -103,7 +103,7 @@ export async function mailer(
 ) {
   let transporter = nodemailer.createTransport(provider);
   try {
-    const act = classroom?.placeActivity.date;
+    const time = classroom?.placeActivity.date;
 
     let info = await transporter.sendMail({
       from: `"Equipo Con Buena Energía 💚" <${provider.auth.user}>`, // sender address
@@ -116,7 +116,7 @@ export async function mailer(
           <p>te has inscrito en el taller Taller co-organizado con ${
             classroom?.colaborator ?? 'indefinido'
           }</p>
-          <p>a realizarse el ${act?.toLocaleDateString()}</p>
+          <p>a realizarse el ${time?.toLocaleDateString()}</p>
           <p>tu link de dirección de acceso es aquí 👉 <a href=${
             classroom?.placeActivity.dir ?? 'sin lugar'
           }> LINK DE ACCESO </a></p>
