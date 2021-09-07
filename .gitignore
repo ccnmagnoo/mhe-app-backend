@@ -80,3 +80,4 @@ node_modules/
 # dotenv environment variables file
 
 .env functions/src/config/mailProvider.ts functions/src/config/mailProvider.ts
+functions/src/config/mailProvider.ts
