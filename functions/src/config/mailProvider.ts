@@ -3,7 +3,7 @@ export const provider = {
   port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: '***@minenergia.cl', // generated ethereal user
-    pass: '****', // generated ethereal password
+    user: '***@minenergia.cl', // user
+    pass: '****', // pass
   },
 };
