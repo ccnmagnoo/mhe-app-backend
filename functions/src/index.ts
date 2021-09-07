@@ -140,11 +140,12 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
           a retirar en el horario indicado, usted puede 
           enviar un representante con un <strong>poder simple</strong>
           con su nombre y rut, autorizando al representante 
-          el retiro de su kit
-          <blockquote>
+          el retiro de su kit.
+          </blockquote>
           </p>
           <br>
-          <p>💚 No olvides participar ${benf.name.firstName}!, nos vemos 👋</p>
+          <p>💚 No olvides participar ${benf.name.firstName}, nos vemos👋</p>
+          <p>Atentamente Equipo Con Buena Energía</p>
         </section>
         <section>
         token:${benf.uuid}
