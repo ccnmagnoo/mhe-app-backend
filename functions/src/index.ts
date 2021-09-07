@@ -1,9 +1,9 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import * as nodemailer from 'nodemailer';
 import { dbKey } from './databaseKeys';
 import { IBeneficiary, iBeneficiaryConverter } from './Beneficiary.interface';
 import { IClassroom, iClassroomConverter } from './Classroom.interface';
-import * as nodemailer from 'nodemailer';
 import { provider } from './config/mailProvider';
 
 admin.initializeApp();
@@ -101,40 +101,40 @@ exports.onCreateSuscription = functions.firestore
  * @function mailer nodemailer services to send basic
  * information of activities to suscribed users.
  */
-export async function mailer(
-  classroom: IClassroom | undefined,
-  beneficiary: IBeneficiary
-) {
+export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
   let transporter = nodemailer.createTransport(provider);
 
   try {
-    const time = classroom?.placeActivity.date;
+    const time = room?.placeActivity.date;
 
     let info = await transporter.sendMail({
       from: `"Equipo Con Buena Energía 💚" <${provider.auth.user}>`, // sender address
       to: provider.auth.user, // list of receivers
       subject: 'Inscripción Con Buena Energía', // Subject line
-      html: `<div>
+      html: `<body>
       <h3>Con Buena Energía del Ministerio de Energía</h3>
-        <div> 
-          <h4>Bienvenid@ ${beneficiary.name.firstName}</h4>
+        <section> 
+          <h4>Bienvenid@ ${benf.name.firstName}</h4>
           <p>te has inscrito en el taller Taller co-organizado con ${
-            classroom?.colaborator ?? 'indefinido'
+            room?.colaborator ?? 'indefinido'
           }</p>
-          <p>a realizarse el ${time?.toLocaleDateString()}</p>
-          <p>tu link de dirección de acceso es aquí 👉 <a href=${
-            classroom?.placeActivity.dir ?? 'sin lugar'
-          }> LINK DE ACCESO </a></p>
-          <hr>
+          <p>a realizarse el ${time?.toLocaleDateString()},</p>
+          <p>deberás conectacter mediante el siguiente de acceso 👉 <a href=${
+            room?.placeActivity.dir
+          }> Link de Acceso </a></p>
+          <br>
           <p>
           Recuerde que el taller tiene como beneficio un kit de ahorro energético,
-          este será entregado el ${classroom?.placeDispatch?.date.toLocaleString()} en
-          la siguiente dirección <strong>${classroom?.placeDispatch?.dir}</strong>
+          este será entregado el ${room?.placeDispatch?.date.toLocaleDateString()}  
+          <br>
+          en la siguiente dirección:
+          <br> 
+          ${room?.placeDispatch?.name},<strong>${room?.placeDispatch?.dir}</strong>
           </p>
-          <hr>
-          <p>💚 No olvides participar!!</p>
-        </div>
-      </div>`, // html body
+          <br>
+          <p>💚 No olvides participar ${benf.name.firstName}!!</p>
+        </section>
+      </body>`, // html body
     });
     console.log('mailer', info.accepted);
   } catch (error) {
