@@ -5,6 +5,7 @@ import { dbKey } from './databaseKeys';
 import { IBeneficiary, iBeneficiaryConverter } from './Beneficiary.interface';
 import { IClassroom, iClassroomConverter } from './Classroom.interface';
 import { provider } from './config/mailProvider';
+import timeLocale from './timeLocale';
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -109,30 +110,31 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
 
     let info = await transporter.sendMail({
       from: `"Equipo Con Buena Energía 💚" <${provider.auth.user}>`, // sender address
-      to: provider.auth.user, // list of receivers
+      to: benf.email, // list of receivers
       subject: 'Inscripción Con Buena Energía', // Subject line
       html: `<body>
       <h3>Con Buena Energía del Ministerio de Energía</h3>
         <section> 
           <h4>Bienvenid@ ${benf.name.firstName}</h4>
-          <p>te has inscrito en el taller Taller co-organizado con ${
+          <p>Se ha inscrito en el taller "Con Buena Energía" Taller co-organizado con ${
             room?.colaborator ?? 'indefinido'
-          }</p>
-          <p>a realizarse el ${time?.toLocaleDateString()},</p>
-          <p>deberás conectacter mediante el siguiente de acceso 👉 <a href=${
+          } a realizarse el ${timeLocale(time)}.</p>
+  
+          <p>Deberá conectarse ese día mediante el siguiente de acceso 👉 <a href=${
             room?.placeActivity.dir
           }> Link de Acceso </a></p>
           <br>
+          No lo pierdas<br><br>
           <p>
           Recuerde que el taller tiene como beneficio un kit de ahorro energético,
-          este será entregado el ${room?.placeDispatch?.date.toLocaleDateString()}  
+          este será entregado el ${timeLocale(room?.placeDispatch?.date)}  
           <br>
           en la siguiente dirección:
           <br> 
           ${room?.placeDispatch?.name},<strong>${room?.placeDispatch?.dir}</strong>
           </p>
           <br>
-          <p>💚 No olvides participar ${benf.name.firstName}!!</p>
+          <p>💚 No olvides participar ${benf.name.firstName}!, nos vemos 👋</p>
         </section>
       </body>`, // html body
     });
