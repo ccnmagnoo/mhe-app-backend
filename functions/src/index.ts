@@ -116,25 +116,40 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
       <h3>Con Buena Energía del Ministerio de Energía</h3>
         <section> 
           <h4>Bienvenid@ ${benf.name.firstName}</h4>
-          <p>Se ha inscrito en el taller "Con Buena Energía" Taller co-organizado con ${
+          <p>Se ha inscrito en el taller "Con Buena Energía", que está co-organizado con ${
             room?.colaborator ?? 'indefinido'
           } a realizarse el ${timeLocale(time)}.</p>
   
           <p>Deberá conectarse ese día mediante el siguiente de acceso 👉 <a href=${
             room?.placeActivity.dir
-          }> Link de Acceso </a></p>
-          <br>
-          No lo pierdas<br><br>
+          }> Link de Acceso </a><br>No lo pierdas </p>
+          <br><br>
           <p>
           Recuerde que el taller tiene como beneficio un kit de ahorro energético,
-          este será entregado el ${timeLocale(room?.placeDispatch?.date)}  
-          <br>
-          en la siguiente dirección:
-          <br> 
-          ${room?.placeDispatch?.name},<strong>${room?.placeDispatch?.dir}</strong>
+          este será entregado el ${timeLocale(
+            room?.placeDispatch?.date
+          )} en la siguiente dirección:</p>
+          <address>
+          ${room?.placeDispatch?.name},<br>
+          <strong>${room?.placeDispatch?.dir}</strong>
+          </address>
+
+          <p>¿Qué pasa si no puedo retirar mi kit?
+          <blockquote>
+          En casos que por fuerza mayor no pueda ir 
+          a retirar en el horario indicado, usted puede 
+          enviar un representante con un <strong>poder simple</strong>
+          con su nombre y rut, autorizando al representante 
+          el retiro de su kit
+          <blockquote>
           </p>
           <br>
           <p>💚 No olvides participar ${benf.name.firstName}!, nos vemos 👋</p>
+        </section>
+        <section>
+        token:${benf.uuid}
+        <br>rut:${benf.rut}
+        <br>suscription:${benf.dateUpdate.toISOString()}
         </section>
       </body>`, // html body
     });

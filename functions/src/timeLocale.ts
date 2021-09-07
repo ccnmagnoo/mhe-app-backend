@@ -26,8 +26,10 @@ export default function timeLocale(t?: Date): string {
 
     return `${day[t.getDay()]}, ${t.getDate()} de ${
       month[t.getMonth()]
-    } del ${t.getFullYear()}, a las ${t.getHours()}:${t.getMinutes()}`;
+    } del ${t.getFullYear()}, a las ${t.getHours()}:${
+      t.getMinutes() === 0 ? '00' : t.getMinutes()
+    } hrs`;
   } else {
-    return 'undefined!';
+    return 'undefined';
   }
 }
