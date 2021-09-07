@@ -1,9 +1,9 @@
 export const provider = {
-  host: 'smtp.office365.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // true for 465, false for other ports
   auth: {
-    user: '***@minenergia.cl', // user
-    pass: '****', // password
+    user: 'conbuenaenergia@***', // user
+    pass: 'CC.Energia****', // password
   },
 };
