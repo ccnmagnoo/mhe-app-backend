@@ -1,6 +1,12 @@
-export default function timeLocale(t?: Date): string {
+/**
+ * @function timeLocale() returns spanish date string in long format
+ */
+export default function timeLocale(
+  t?: Date,
+  timeFormat?: 'long' | 'short'
+): string | undefined {
   if (t !== undefined) {
-    const month = [
+    const mmSrt = [
       'enero',
       'febrero',
       'marzo',
@@ -13,8 +19,8 @@ export default function timeLocale(t?: Date): string {
       'octubre',
       'noviembre',
       'diciembre',
-    ];
-    const day = [
+    ]; //month array names in spanish
+    const ddStr = [
       'domingo',
       'lunes',
       'martes',
@@ -22,14 +28,26 @@ export default function timeLocale(t?: Date): string {
       'jueves',
       'viernes',
       'sábado',
-    ];
+    ]; //days array names in spanish
 
-    return `${day[t.getDay()]}, ${t.getDate()} de ${
-      month[t.getMonth()]
-    } del ${t.getFullYear()}, a las ${t.getHours()}:${
-      t.getMinutes() === 0 ? '00' : t.getMinutes()
-    } hrs`;
+    const d = {
+      dddd: ddStr[t.getDay()],
+      ddd: ddStr[t.getDay()].slice(0, 2),
+      dd: t.getDate(),
+      MMMM: mmSrt[t.getMonth()],
+      MMM: mmSrt[t.getMonth()].slice(0, 3),
+      MM: t.getMonth() + 1 < 10 ? `0${t.getMonth() + 1}` : (t.getMonth() + 1).toString(),
+      yyyy: t.getFullYear(),
+      yy: t.getFullYear().toString().slice(2, 4),
+      hh: t.getHours(),
+      mm: t.getMinutes() < 10 ? `0${t.getMinutes()}` : t.getMinutes().toString(),
+    }; //time string set
+    const options = {
+      long: `${d.dddd}, ${d.dd} de ${d.MMMM} de ${d.yyyy}, a las ${d.hh}:${d.mm} hrs`,
+      short: `${d.ddd} ${d.dd}/${d.MM}/${d.yy} ${d.hh}:${d.mm} hrs`,
+    };
+    return options[timeFormat ?? 'long'];
   } else {
-    return 'undefined';
+    return undefined;
   }
 }
