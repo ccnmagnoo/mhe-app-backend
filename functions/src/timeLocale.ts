@@ -3,7 +3,7 @@
  */
 export default function timeLocale(
   t?: Date,
-  timeFormat?: 'long' | 'short'
+  timeFormat?: 'long' | 'short' | 'onlyDate' | 'onlyTime'
 ): string | undefined {
   if (t !== undefined) {
     const mmSrt = [
@@ -45,6 +45,8 @@ export default function timeLocale(
     const options = {
       long: `${d.dddd}, ${d.dd} de ${d.MMMM} de ${d.yyyy}, a las ${d.hh}:${d.mm} hrs`,
       short: `${d.ddd} ${d.dd}/${d.MM}/${d.yy} ${d.hh}:${d.mm} hrs`,
+      onlyDate: `${d.dd}/${d.MM}/${d.yy}`,
+      onlyTime: `${d.hh}:${d.mm} hrs`,
     };
     return options[timeFormat ?? 'long'];
   } else {
