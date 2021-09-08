@@ -1,5 +1,9 @@
 /**
- * @function timeLocale() returns spanish date string in long format
+ * @function timeLocale() returns spanish date string in 4 main format EXCEL alike
+  long: dddd, dd [de] MMMM [de] yyyy, [a las] HH:mm [hrs]
+  short: ddd, dd/MM/yy HH:mm[hrs]
+  onlyDate: dd/MM/yyyy
+  onlyTime: HH:mm[hrs]
  */
 export default function timeLocale(
   t?: Date,
@@ -39,14 +43,14 @@ export default function timeLocale(
       MM: t.getMonth() + 1 < 10 ? `0${t.getMonth() + 1}` : (t.getMonth() + 1).toString(),
       yyyy: t.getFullYear(),
       yy: t.getFullYear().toString().slice(2, 4),
-      hh: t.getHours(),
+      HH: t.getHours(),
       mm: t.getMinutes() < 10 ? `0${t.getMinutes()}` : t.getMinutes().toString(),
     }; //time string set
     const options = {
-      long: `${d.dddd}, ${d.dd} de ${d.MMMM} de ${d.yyyy}, a las ${d.hh}:${d.mm} hrs`,
-      short: `${d.ddd} ${d.dd}/${d.MM}/${d.yy} ${d.hh}:${d.mm} hrs`,
+      long: `${d.dddd}, ${d.dd} de ${d.MMMM} de ${d.yyyy}, a las ${d.HH}:${d.mm} hrs`,
+      short: `${d.ddd} ${d.dd}/${d.MM}/${d.yy} ${d.HH}:${d.mm} hrs`,
       onlyDate: `${d.dd}/${d.MM}/${d.yy}`,
-      onlyTime: `${d.hh}:${d.mm} hrs`,
+      onlyTime: `${d.HH}:${d.mm} hrs`,
     };
     return options[timeFormat ?? 'long'];
   } else {
