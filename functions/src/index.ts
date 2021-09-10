@@ -144,13 +144,12 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
           </address>
 
           <p>
-          <span style="color:Tomato;">¿Qué pasa si no puedo retirar mi kit?</span>
+          <span style="color:Silver;">¿Qué pasa si no puedo retirar mi kit?</span>
           <blockquote style="background-color:PapayaWhip;border-radius: 5px;padding: 5px">
           En casos que por fuerza mayor no pueda ir 
-          a retirar el kit personalmente en el horario indicado, usted puede 
-          enviar un representante con un <strong>poder simple</strong>
-          indicando su nombre y rut, autorizando al representante 
-          el retiro de su kit.
+          a retirar el kit, usted puede enviar un representante con un 
+          <strong>poder simple</strong> indicando su nombre y rut, 
+          autorizando al representante el retiro de su kit.
           </blockquote>
           </p>
           <p>Si quiere saber más de eficiencia energética , puedes descargar nuestra 
