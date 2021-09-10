@@ -18,7 +18,7 @@ function getLinkAddress(address?: string): string | undefined {
   if (urlRE.test(address)) {
     return address; //return link address
   } else {
-    return `${gmaps}${address.replace(' ', '+')}`; //return a google map link
+    return `${gmaps}${address.split(' ').join('+')}`; //return a google map link
   }
 }
 
