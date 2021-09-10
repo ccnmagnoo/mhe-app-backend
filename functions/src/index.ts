@@ -143,9 +143,9 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
       }</a></strong>
           </address>
 
-          <p style="background-color:PapayaWhip;border-radius: 5px;padding: 5px">
+          <p>
           <span style="color:Tomato;">¿Qué pasa si no puedo retirar mi kit?</span>
-          <blockquote>
+          <blockquote style="background-color:PapayaWhip;border-radius: 5px;padding: 5px">
           En casos que por fuerza mayor no pueda ir 
           a retirar el kit personalmente en el horario indicado, usted puede 
           enviar un representante con un <strong>poder simple</strong>
