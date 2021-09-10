@@ -119,7 +119,7 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
           <h4>Bienvenid@ ${benf.name.firstName}</h4>
 
           <p>
-          Se ha inscrito en el taller "Con Buena Energía", que está co-organizado con ${
+          Se ha inscrito en el taller "Con Buena Energía", realizado en colaboración con  ${
             room?.colaborator ?? 'indefinido'
           } a realizarse el ${timeLocale(time)}.
           </p>
@@ -147,16 +147,16 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
           <span style="color:Tomato;">¿Qué pasa si no puedo retirar mi kit?</span>
           <blockquote>
           En casos que por fuerza mayor no pueda ir 
-          a retirar en el horario indicado, usted puede 
+          a retirar el kit personalmente en el horario indicado, usted puede 
           enviar un representante con un <strong>poder simple</strong>
-          con su nombre y rut, autorizando al representante 
+          indicando su nombre y rut, autorizando al representante 
           el retiro de su kit.
           </blockquote>
           </p>
-          <p>Si quiere saber más de eficiencia energética, puedes descargar nuestra 
+          <p>Si quiere saber más de eficiencia energética , puedes descargar nuestra 
           <a href="https://www.mienergia.cl/sites/default/files/cuadernillo_guia_energia-baja.pdf"> guía de Casa Eficiente 💾 </a>
           </p>
-          <p>💚 No olvides participar en el taller ${benf.name.firstName}, nos vemos👋</p>
+          <p>No olvides participar en el taller ${benf.name.firstName}, nos vemos👋</p>
           <p>Atentamente Equipo Con Buena Energía</p>
         </section>
         <section>
