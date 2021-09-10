@@ -6,6 +6,7 @@ import { IBeneficiary, iBeneficiaryConverter } from './Beneficiary.interface';
 import { IClassroom, iClassroomConverter } from './Classroom.interface';
 import { provider } from './config/mailProvider';
 import timeLocale from './timeLocale';
+import getLinkAddress from './getLinkAddress';
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -116,25 +117,34 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
       <h3>Con Buena Energía del Ministerio de Energía</h3>
         <section> 
           <h4>Bienvenid@ ${benf.name.firstName}</h4>
-          <p>Se ha inscrito en el taller "Con Buena Energía", que está co-organizado con ${
+
+          <p>
+          Se ha inscrito en el taller "Con Buena Energía", que está co-organizado con ${
             room?.colaborator ?? 'indefinido'
-          } a realizarse el ${timeLocale(time)}.</p>
+          } a realizarse el ${timeLocale(time)}.
+          </p>
   
-          <p>Deberá conectarse ese día mediante el siguiente de acceso 👉 <a href=${
+          <p>Deberá conectarse ese día mediante el siguiente de acceso 👉 <a href=${getLinkAddress(
             room?.placeActivity.dir
-          }> Link de Acceso </a><br>No lo pierdas </p>
-          <br><br>
+          )}> Dirección de Acceso✅</a><br>No pierdas esta dirección 
+          </p>
+     
           <p>
           Recuerde que el taller tiene como beneficio un kit de ahorro energético,
           este será entregado el ${timeLocale(
             room?.placeDispatch?.date
-          )} en la siguiente dirección:</p>
+          )} en la siguiente dirección:
+          </p>
+
           <address>
           ${room?.placeDispatch?.name},<br>
-          <strong>${room?.placeDispatch?.dir}</strong>
+          <strong><a href=${getLinkAddress(room?.placeDispatch?.dir)}>${
+        room?.placeDispatch?.dir
+      }</a></strong>
           </address>
 
-          <p>¿Qué pasa si no puedo retirar mi kit?
+          <p style="background-color:PapayaWhip;border-radius: 5px;padding: 5px">
+          <span style="color:Tomato;">¿Qué pasa si no puedo retirar mi kit?</span>
           <blockquote>
           En casos que por fuerza mayor no pueda ir 
           a retirar en el horario indicado, usted puede 
@@ -143,8 +153,10 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
           el retiro de su kit.
           </blockquote>
           </p>
-          <br>
-          <p>💚 No olvides participar ${benf.name.firstName}, nos vemos👋</p>
+          <p>Si quiere saber más de eficiencia energética, puedes descargar nuestra 
+          <a href="https://www.mienergia.cl/sites/default/files/cuadernillo_guia_energia-baja.pdf"> guía de Casa Eficiente 💾 </a>
+          </p>
+          <p>💚 No olvides participar en el taller ${benf.name.firstName}, nos vemos👋</p>
           <p>Atentamente Equipo Con Buena Energía</p>
         </section>
         <section>
