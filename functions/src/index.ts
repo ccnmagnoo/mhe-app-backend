@@ -113,10 +113,20 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
       from: `"Equipo Con Buena Energía 💚" <${provider.auth.user}>`, // sender address
       to: benf.email, // list of receivers
       subject: 'Inscripción Con Buena Energía', // Subject line
-      html: `<body>
-      <h3>Con Buena Energía del Ministerio de Energía</h3>
+      html: `
+      <body>
+        <img 
+        src="https://conbuenaenergia.web.app/static/media/cbelogo.0e6fc453.svg" 
+        alt="con buena energía" 
+        height=80px>
+  
         <section> 
-          <h4>Bienvenid@ ${benf.name.firstName}</h4>
+          <h3>
+          Con Buena Energía <br>
+          <span style="color:Gray;font-size: 1.2rem">del Ministerio de Energía</span>
+          </h3>
+
+          <h4>Felicidades ${benf.name.firstName}</h4>
 
           <p>
           Se ha inscrito en el taller "Con Buena Energía", realizado en colaboración con  ${
