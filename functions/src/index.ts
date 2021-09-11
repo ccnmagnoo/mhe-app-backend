@@ -120,55 +120,103 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
         alt="con buena energía" 
         height=80px>
   
-        <section> 
+        <section style="
+        box-shadow: 2px 2px 5px Gray;
+        background-color:White;
+        padding:20px;
+        margin:auto;
+        border-radius:20px;
+        border:solid 1px Silver;
+        max-width:600px;
+        "
+        > 
           <h3>
           Con Buena Energía <br>
-          <span style="color:Gray;font-size: 1.2rem">del Ministerio de Energía</span>
+          <span style="
+          color:Gray;
+          font-size: 1.2rem
+          ">del Ministerio de Energía</span>
           </h3>
 
           <h4>Felicidades ${benf.name.firstName}</h4>
 
           <p>
-          Se ha inscrito en el taller "Con Buena Energía", realizado en colaboración con  ${
+          Se ha inscrito existosamente en el taller "Con Buena Energía", realizado en colaboración con  ${
             room?.colaborator ?? 'indefinido'
           } a realizarse el ${timeLocale(time)}.
           </p>
   
-          <p>Deberá conectarse ese día mediante el siguiente de acceso 👉 <a href=${getLinkAddress(
-            room?.placeActivity.dir
-          )}> Dirección de Acceso✅</a><br>No pierdas esta dirección 
+          <p>
+          Deberá conectarse ese día mediante el siguiente de acceso 👉 
+          <a 
+          style="
+          text-decoration:none;
+          color:White;
+          background:linear-gradient(to top left, Red 0%, Salmon 100%);
+          padding:5px;
+          border-radius:5px;
+          "
+          href=${getLinkAddress(room?.placeActivity.dir)}
+          > Acceso Taller </a>
           </p>
      
           <p>
-          Recuerde que el taller tiene como beneficio un kit de ahorro energético,
-          este será entregado el ${timeLocale(
+          Recuerde que al participar en el taller y cumplir con los quisitos,
+          usted tiene derecho a un kit de ahorro energético, que será entregado el
+          próximo  ${timeLocale(
             room?.placeDispatch?.date
-          )} en la siguiente dirección:
-          </p>
+          )} en la siguiente dirección:<br>
 
           <address>
           ${room?.placeDispatch?.name},<br>
           <strong><a href=${getLinkAddress(room?.placeDispatch?.dir)}>${
         room?.placeDispatch?.dir
-      }</a></strong>
+          }</a></strong>
           </address>
+          </p>
+          
+          <p style="
+          background:PapayaWhip;
+          padding:10px;
+          margin:auto;
+          max-width:400px;
+
+          border-radius:20px;
+          border:solid 2px PeachPuff;
+         
+          color:Gray;
+          font-size:0.9rem;
+          text-align:justify;
+          ">
+          <span style="color:Salmon;">¿Qué pasa si no puedo retirar mi kit?</span><br>
+          <article>
+          En el caso que por fuerza mayor no pueda ir 
+          a retirar el kit personalmente, usted puede enviar un representante con un 
+          <strong>poder simple</strong> con la autorización el retiro de su kit
+          indicando su nombre completo ,rut y firma.
+          </article>
+          </p>
 
           <p>
-          <span style="color:Silver;">¿Qué pasa si no puedo retirar mi kit?</span>
-          <blockquote style="background-color:PapayaWhip;border-radius: 5px;padding: 5px">
-          En casos que por fuerza mayor no pueda ir 
-          a retirar el kit, usted puede enviar un representante con un 
-          <strong>poder simple</strong> indicando su nombre y rut, 
-          autorizando al representante el retiro de su kit.
-          </blockquote>
+          Si quiere saber más del cómo ahorrar energía y dinero en su hogar , puedes descargar nuestra guía de la 
+          <a 
+          style="
+          text-decoration:none;
+          color:White;
+          background:linear-gradient(to top left, RoyalBlue 0%, DodgerBlue 100%);
+          padding:2px;
+          border-radius:5px;
+          "
+          target="_blank"
+          href="https://www.mienergia.cl/sites/default/files/cuadernillo_guia_energia-baja.pdf"
+          > Casa Eficiente </a>
+
           </p>
-          <p>Si quiere saber más de eficiencia energética , puedes descargar nuestra 
-          <a href="https://www.mienergia.cl/sites/default/files/cuadernillo_guia_energia-baja.pdf"> guía de Casa Eficiente 💾 </a>
-          </p>
-          <p>No olvides participar en el taller ${benf.name.firstName}, nos vemos👋</p>
+          <p>No olvide participar ${benf.name.firstName}, nos vemos👋</p>
           <p>Atentamente Equipo Con Buena Energía</p>
         </section>
-        <section>
+        <br>
+        <section style="color:Gray;font-size:1rem">
         token:${benf.uuid}
         <br>rut:${benf.rut}
         <br>suscription:${benf.dateUpdate.toISOString()}
