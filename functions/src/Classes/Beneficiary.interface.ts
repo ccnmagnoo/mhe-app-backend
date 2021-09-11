@@ -1,5 +1,5 @@
 import { Gender, IPerson } from './Person.Interface';
-import { firebase } from './index';
+import { firebase } from '../index';
 
 export interface IBeneficiary extends IPerson {
   sign?: string;

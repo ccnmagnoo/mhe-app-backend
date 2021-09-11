@@ -1,12 +1,12 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as nodemailer from 'nodemailer';
-import { dbKey } from './databaseKeys';
-import { IBeneficiary, iBeneficiaryConverter } from './Beneficiary.interface';
-import { IClassroom, iClassroomConverter } from './Classroom.interface';
+import { dbKey } from './Tools/databaseKeys';
+import { IBeneficiary, iBeneficiaryConverter } from './Classes/Beneficiary.interface';
+import { IClassroom, iClassroomConverter } from './Classes/Classroom.interface';
 import { provider } from './config/mailProvider';
-import timeLocale from './timeLocale';
-import getLinkAddress from './getLinkAddress';
+import timeLocale from './Tools/timeLocale';
+import getLinkAddress from './Tools/getLinkAddress';
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -163,15 +163,13 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
           <p>
           Recuerde que al participar en el taller y cumplir con los quisitos,
           usted tiene derecho a un kit de ahorro energético, que será entregado el
-          próximo  ${timeLocale(
-            room?.placeDispatch?.date
-          )} en la siguiente dirección:<br>
+          próximo  ${timeLocale(room?.placeDispatch?.date)} en la siguiente dirección:<br>
 
           <address>
           ${room?.placeDispatch?.name},<br>
           <strong><a href=${getLinkAddress(room?.placeDispatch?.dir)}>${
         room?.placeDispatch?.dir
-          }</a></strong>
+      }</a></strong>
           </address>
           </p>
           
