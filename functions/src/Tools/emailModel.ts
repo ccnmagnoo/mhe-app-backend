@@ -54,7 +54,7 @@ const emailModel = (room?: IClassroom, benf?: IBeneficiary): string => {
         color:White;
         background-color:RoyalBlue;
         padding:2px;
-        border:solid 1px Blue
+        border:solid 1px Blue;
         border-radius:5px;
     `,
   };
