@@ -24,7 +24,7 @@ const emailModel = (room?: IClassroom, benf?: IBeneficiary): string => {
     paper: `
         background-color:White;
         border-radius:20px;
-        border:solid 1px Silver;
+        border:solid 2px Gray;
         padding:20px;
         margin:auto;
         max-width:600px;
@@ -52,8 +52,9 @@ const emailModel = (room?: IClassroom, benf?: IBeneficiary): string => {
     buttonBlue: `
         text-decoration:none;
         color:White;
-        background:DodgerBlue;
+        background-color:RoyalBlue;
         padding:2px;
+        border:solid 1px Blue
         border-radius:5px;
     `,
   };
@@ -115,7 +116,7 @@ const emailModel = (room?: IClassroom, benf?: IBeneficiary): string => {
           <p>
           Si quiere saber más del cómo ahorrar energía y dinero en su hogar , puedes descargar nuestra guía de la 
           <a 
-          style=${styles.buttonBlue} "
+          style="${styles.buttonBlue}"
           target="_blank"
           href="https://www.mienergia.cl/sites/default/files/cuadernillo_guia_energia-baja.pdf"
           > Casa Eficiente </a>
