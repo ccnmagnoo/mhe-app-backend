@@ -36,8 +36,7 @@ const emailModel = (room?: IClassroom, benf?: IBeneficiary): string => {
         alt="con buena energía" 
         height=80px>
   
-        <section style="${styles.paper}"
-        > 
+        <section style="${styles.paper}"> 
           <h3>
           Con Buena Energía <br>
           <span style="
