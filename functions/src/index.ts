@@ -5,8 +5,6 @@ import { dbKey } from './Tools/databaseKeys';
 import { IBeneficiary, iBeneficiaryConverter } from './Classes/Beneficiary.interface';
 import { IClassroom, iClassroomConverter } from './Classes/Classroom.interface';
 import { provider } from './config/mailProvider';
-import timeLocale from './Tools/timeLocale';
-import getLinkAddress from './Tools/getLinkAddress';
 import emailModel from './Tools/emailModel';
 
 admin.initializeApp();
