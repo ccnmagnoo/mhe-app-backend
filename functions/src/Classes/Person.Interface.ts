@@ -1,4 +1,4 @@
-import { firebase } from './index';
+import { firebase } from '../index';
 import { IEnergyPoll } from './EnergyPoll.interface';
 
 export interface IPerson {

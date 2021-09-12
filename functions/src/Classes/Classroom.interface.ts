@@ -1,6 +1,6 @@
 import { LandType } from './LandType.enum';
 import { IPlace } from './Place.interface';
-import { firebase } from './index';
+import { firebase } from '../index';
 
 export interface IClassroom {
   uuid: string;
