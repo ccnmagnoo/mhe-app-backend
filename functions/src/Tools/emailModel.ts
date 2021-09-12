@@ -6,7 +6,7 @@ import timeLocale from './timeLocale';
 const emailModel = (room?: IClassroom, benf?: IBeneficiary): string => {
   const happySalutes = [
     'Felicidades',
-    'Enhorabuenana',
+    'Enhorabuena',
     'Estupendo',
     'Maravilloso',
     'Genial',
