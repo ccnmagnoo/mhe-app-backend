@@ -7,6 +7,9 @@ const router = Router();
 module.exports = router;
 
 router.get(`/api/rooms/`, async (req, res) => {
+  /**
+   * @api router for powerBI Report
+   */
   const refRoom = db
     .collection(`${key.act}/${key.uid}/${key.room}`)
     .withConverter(iClassroomConverter);
