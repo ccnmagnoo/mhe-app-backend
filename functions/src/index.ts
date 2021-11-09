@@ -1,14 +1,23 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as nodemailer from 'nodemailer';
+import * as express from 'express';
 import { dbKey } from './Tools/databaseKeys';
 import { IBeneficiary, iBeneficiaryConverter } from './Classes/Beneficiary.interface';
 import { IClassroom, iClassroomConverter } from './Classes/Classroom.interface';
 import { provider } from './config/mailProvider';
 import emailModel from './Tools/emailModel';
 
-admin.initializeApp();
-const db = admin.firestore();
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+  databaseURL: 'https://myappt51.firebaseio.com',
+});
+export const db = admin.firestore();
+
+//API REST
+const app = express();
+
+////////////////////////////////CLOUD FUNCTIONS
 
 /**
  *  @function onCreateBeneficiary
