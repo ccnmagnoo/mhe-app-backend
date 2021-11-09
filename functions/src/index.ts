@@ -14,9 +14,10 @@ admin.initializeApp({
 });
 export const db = admin.firestore();
 
-//API REST
+/////////////////////////////////API REST
 const app = express();
-
+app.use(require('./routes/roomReport.routes'));
+exports.app = functions.https.onRequest(app);
 ////////////////////////////////CLOUD FUNCTIONS
 
 /**
