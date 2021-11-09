@@ -84,11 +84,11 @@ const emailModel = (room?: IClassroom, benf?: IBeneficiary): string => {
           </p>
   
           <p>
-          Deberá conectarse ese día mediante el siguiente de acceso 👉 
+          Esta fecha deberá dirigirse a la siguiente dirección 👉 
           <a 
           style="${styles.buttonRed}"
           href=${getLinkAddress(room?.placeActivity.dir)}
-          > Acceso Taller </a>
+          > Dirección Taller </a>
           </p>
      
           <p>
