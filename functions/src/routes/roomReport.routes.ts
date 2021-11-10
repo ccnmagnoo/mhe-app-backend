@@ -6,15 +6,18 @@ import { dbKey as key } from './../Tools/databaseKeys';
 const router = Router();
 module.exports = router;
 
-router.get(`/api/rooms/`, async (req, res) => {
+router.get(`/api/rooms/:key`, async (req, res) => {
   /**
    * @api router for powerBI Report
    */
-  const refRoom = db
-    .collection(`${key.act}/${key.uid}/${key.room}`)
-    .withConverter(iClassroomConverter);
+  if (req.params.key !== 'yyz')
+    return res.status(500).json({ numberOfRooms: 'wrong key' });
 
   try {
+    const refRoom = db
+      .collection(`${key.act}/${key.uid}/${key.room}`)
+      .withConverter(iClassroomConverter);
+
     const query = await refRoom.get();
 
     const rooms: IClassroom[] = query.docs.map((snapshot) => {

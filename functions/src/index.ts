@@ -2,6 +2,8 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as nodemailer from 'nodemailer';
 import * as express from 'express';
+import * as cors from 'cors';
+
 import { dbKey } from './Tools/databaseKeys';
 import { IBeneficiary, iBeneficiaryConverter } from './Classes/Beneficiary.interface';
 import { IClassroom, iClassroomConverter } from './Classes/Classroom.interface';
@@ -16,6 +18,7 @@ export const db = admin.firestore();
 
 /////////////////////////////////API REST
 const app = express();
+app.use(cors({ origin: true }));
 app.use(require('./routes/roomReport.routes'));
 exports.app = functions.https.onRequest(app);
 ////////////////////////////////CLOUD FUNCTIONS
