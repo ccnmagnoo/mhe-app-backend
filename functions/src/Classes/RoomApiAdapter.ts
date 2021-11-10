@@ -1,4 +1,6 @@
+import getCityDetails from '../Tools/getCityDetails';
 import { IClassroom } from './Classroom.interface';
+import { LandType } from './LandType.enum';
 
 export default class RoomApiAdapter {
   readonly classroom: IClassroom[];
@@ -15,6 +17,8 @@ export default class RoomApiAdapter {
           idCal: room.idCal,
           date: room.placeActivity.date,
           colaborator: room.colaborator,
+          cityOnOp: room.cityOnOp,
+          province: getCityDetails(room.cityOnOp, LandType.city)?.province,
           encompass: room.land.name,
           encompassType: room.land.type,
           attendees: room.attendees.length,
