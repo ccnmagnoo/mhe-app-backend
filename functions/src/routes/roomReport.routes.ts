@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { IClassroom, iClassroomConverter } from '../Classes/Classroom.interface';
+import RoomApiAdapter from '../Classes/RoomApiAdapter';
 import { db } from '../index';
 import { dbKey as key } from './../Tools/databaseKeys';
 
@@ -40,9 +41,11 @@ router.get(`/api/rooms`, async (req, res) => {
       .filter((room) => {
         return room.attendees.length > 0;
       });
+    console.log('api room request, return number of rooms: ', rooms.length);
+    const roomToApi = new RoomApiAdapter(rooms);
 
-    return res.status(200).json({ numberOfRooms: rooms.length });
+    return res.status(200).json(roomToApi.api);
   } catch (error) {
-    return res.status(500).json({ numberOfRooms: 'no data found' });
+    return res.status(500).json({ rooms: 'no data found' });
   }
 });
