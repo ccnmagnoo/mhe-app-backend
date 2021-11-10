@@ -13,8 +13,8 @@ router.get(`/api/rooms`, async (req, res) => {
    * @api router for powerBI Report
    */
 
-  if (req.query.key !== 'yyz')
-    return res.status(500).json({ numberOfRooms: 'wrong key' });
+  if (req.query.key !== key.uid)
+    return res.status(500).json({ numberOfRooms: 'wrong api key' });
   if (req.query.year === undefined)
     return res.status(500).json({ numberOfRooms: 'year undefined' });
 
@@ -36,6 +36,9 @@ router.get(`/api/rooms`, async (req, res) => {
       })
       .filter((room) => {
         return room.placeActivity.date.getFullYear().toString() === yearFilter;
+      })
+      .filter((room) => {
+        return room.attendees.length > 0;
       });
 
     return res.status(200).json({ numberOfRooms: rooms.length });
