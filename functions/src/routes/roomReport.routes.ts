@@ -15,7 +15,7 @@ router.get(`/api/rooms`, async (req, res) => {
 
   if (req.query.key !== 'yyz')
     return res.status(500).json({ numberOfRooms: 'wrong key' });
-  if (req.query.key === undefined)
+  if (req.query.year === undefined)
     return res.status(500).json({ numberOfRooms: 'year undefined' });
 
   try {
