@@ -1,6 +1,6 @@
 import getCityDetails from '../Tools/getCityDetails';
-import { IClassroom } from './Classroom.interface';
-import { LandType } from './LandType.enum';
+import { IClassroom } from '../Classes/Classroom.interface';
+import { LandType } from '../Classes/LandType.enum';
 
 export default class RoomApiAdapter {
   readonly classroom: IClassroom[];

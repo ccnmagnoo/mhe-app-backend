@@ -1,12 +1,16 @@
 import { Router } from 'express';
 import { IClassroom, iClassroomConverter } from '../Classes/Classroom.interface';
-import RoomApiAdapter from '../Classes/RoomApiAdapter';
+import { iPersonConverter } from '../Classes/Person.Interface';
+import RoomApiAdapter from './RoomApiAdapter';
 import { db } from '../index';
 import { dbKey as key } from './../Tools/databaseKeys';
+import PollApiAdapter from './PollApiAdapter';
 
 const router = Router();
 module.exports = router;
-
+/**
+ * @api get Rooms with current year query request
+ */
 router.get(`/api/rooms`, async (req, res) => {
   //res:https://stackoverflow.com/questions/17007997/how-to-access-the-get-parameters-after-in-express
 
@@ -47,5 +51,43 @@ router.get(`/api/rooms`, async (req, res) => {
     return res.status(200).json(roomToApi.api);
   } catch (error) {
     return res.status(500).json({ rooms: 'no data found' });
+  }
+});
+
+/**
+ * @api get people answered enery poll
+ */
+router.get(`/api/energypolls`, async (req, res) => {
+  //res:https://stackoverflow.com/questions/17007997/how-to-access-the-get-parameters-after-in-express
+
+  /**
+   * @api router for powerBI Report of consumptions behaviour
+   */
+
+  if (req.query.key !== key.uid) return res.status(500).json({ polls: 'wrong api key' });
+
+  try {
+    //defining filter query parameter
+
+    //firebase 🔥🔥🔥
+    const ref = db.collection(`${key.act}/${key.uid}/${key.sus}`);
+    const query = await ref
+      .where('energy.electricBill', '>', 0)
+      .withConverter(iPersonConverter)
+      .get();
+
+    //building array from query Snapshot
+    const polls = query.docs.map((it) => {
+      const data = new PollApiAdapter(it.data());
+      return data.api;
+    });
+
+    //beneficiaries.forEach((it) => {
+    //ref.doc(it.uuid).set({ rut: it.rut.toLocaleLowerCase() }, { merge: true });
+    //});
+
+    return res.status(200).json({ polls: polls });
+  } catch (error) {
+    return res.status(500).json({ polls: 'no data found' });
   }
 });
