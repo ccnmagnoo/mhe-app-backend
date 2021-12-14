@@ -112,8 +112,8 @@ router.get(`/api/beneficiaries`, async (req, res) => {
     //firebase 🔥🔥🔥
     const ref = db.collection(`${key.act}/${key.uid}/${key.cvn}`);
     const query = await ref
-      .where('classroom.dateInstance', '>=', periodIni)
-      .where('classroom.dateInstance', '<=', periodEnd)
+      .where('dateUpdate', '>=', periodIni)
+      .where('dateUpdate', '<=', periodEnd)
       .withConverter(iBeneficiaryConverter)
       .get();
 
