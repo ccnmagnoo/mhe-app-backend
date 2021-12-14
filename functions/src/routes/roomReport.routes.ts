@@ -5,6 +5,8 @@ import RoomApiAdapter from './RoomApiAdapter';
 import { db } from '../index';
 import { dbKey as key } from './../Tools/databaseKeys';
 import PollApiAdapter from './PollApiAdapter';
+import CvnApiAdapter from './CvnApiAdapter';
+import { iBeneficiaryConverter } from '../Classes/Beneficiary.interface';
 
 const router = Router();
 module.exports = router;
@@ -89,5 +91,44 @@ router.get(`/api/energypolls`, async (req, res) => {
     return res.status(200).json({ polls: polls });
   } catch (error) {
     return res.status(500).json({ polls: 'no data found' });
+  }
+});
+
+router.get(`/api/beneficiaries`, async (req, res) => {
+  //res:https://stackoverflow.com/questions/17007997/how-to-access-the-get-parameters-after-in-express
+
+  /**
+   * @api router for powerBI Report of consumptions behaviour
+   */
+
+  if (req.query.key !== key.uid) return res.status(500).json({ polls: 'wrong api key' });
+
+  try {
+    //defining filter query parameter
+    const period = req.query.year as string;
+    const periodIni = new Date(`${period}/1/1`);
+    const periodEnd = new Date(`${period}/12/31`);
+
+    //firebase 🔥🔥🔥
+    const ref = db.collection(`${key.act}/${key.uid}/${key.cvn}`);
+    const query = await ref
+      .where('classroom.dateInstance', '>=', periodIni)
+      .where('classroom.dateInstance', '<=', periodEnd)
+      .withConverter(iBeneficiaryConverter)
+      .get();
+
+    //building array from query Snapshot
+    const result = query.docs.map((it) => {
+      const data = new CvnApiAdapter(it.data());
+      return data.api;
+    });
+
+    //beneficiaries.forEach((it) => {
+    //ref.doc(it.uuid).set({ rut: it.rut.toLocaleLowerCase() }, { merge: true });
+    //});
+
+    return res.status(200).json({ beneficiaries: result });
+  } catch (error) {
+    return res.status(500).json({ beneficiaries: 'no data found' });
   }
 });

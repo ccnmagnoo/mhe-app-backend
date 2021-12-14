@@ -4,6 +4,6 @@ export const provider = {
   secure: true, // true for 465, false for other ports
   auth: {
     user: 'conbuenaenergia@dvt.cl', // user
-    pass: 'CC.E*****', // password
+    pass: 'CC.Energia2021', // password
   },
 };
