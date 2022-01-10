@@ -7,7 +7,7 @@
 function getAge(rut: string): { age: number | null; group: number | null } {
   const cipher = +rut.split('-')[0]; //12345678
   const currentYear = new Date().getFullYear(); //2022
-  const estimatedYearBorn = Math.floor(cipher / (1000000 * 3.46) + 1932.3); //1982
+  const estimatedYearBorn = Math.floor(cipher / (100_000 * 3.46) + 1_932.3); //1982
   const estimatedAge: number = currentYear - estimatedYearBorn;
   const ageCompose = {
     age: estimatedAge > 16 ? estimatedAge : null,
