@@ -18,8 +18,8 @@ export default class CvnApiAdapter {
       city: this._person.address?.city,
       date: this._person.classroom.dateInstance,
       room: this._person.classroom.idCal,
-      gender: this._person.gender,
-      age: getAge(this._person.rut),
+      gender: this._person.gender.toString(),
+      age: getAge(this._person.rut).age,
     };
   }
 }
