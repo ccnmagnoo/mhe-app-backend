@@ -1,4 +1,5 @@
 import { IBeneficiary } from '../Classes/Beneficiary.interface';
+import getAge from '../Tools/getAge';
 
 export default class CvnApiAdapter {
   private _person: IBeneficiary;
@@ -17,6 +18,8 @@ export default class CvnApiAdapter {
       city: this._person.address?.city,
       date: this._person.classroom.dateInstance,
       room: this._person.classroom.idCal,
+      gender: this._person.gender,
+      age: getAge(this._person.rut),
     };
   }
 }
