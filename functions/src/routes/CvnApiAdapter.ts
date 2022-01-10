@@ -14,11 +14,11 @@ export default class CvnApiAdapter {
       father: this._person.name.fatherName,
       mother: this._person.name.motherName,
       rut: this._person.rut,
-      address: this._person.address?.dir,
+      //address: this._person.address?.dir,
       city: this._person.address?.city,
-      date: this._person.classroom.dateInstance,
+      date: this._person.dateUpdate,
       room: this._person.classroom.idCal,
-      gender: this._person.gender.toString(),
+      gender: this._person.gender,
       age: getAge(this._person.rut).age,
     };
   }
