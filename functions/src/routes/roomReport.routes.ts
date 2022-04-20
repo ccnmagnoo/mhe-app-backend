@@ -132,3 +132,25 @@ router.get(`/api/beneficiaries`, async (req, res) => {
     return res.status(500).json({ beneficiaries: 'no data found' });
   }
 });
+
+router.get('/api/oneroom', async (req, res) => {
+  if (req.query.key !== key.uid) return res.status(500).json({ polls: 'wrong api key' });
+  try {
+    //firebase 🔥🔥🔥
+    const ref = db.collection(`${key.act}/${key.uid}/${key.cvn}`);
+    const room = req.query.uuid;
+    const query = await ref
+      .where('classroom.uuid', '==', room)
+      .withConverter(iBeneficiaryConverter)
+      .get();
+
+    const result = query.docs.map((it) => {
+      const data = new CvnApiAdapter(it.data());
+      return data.api;
+    });
+
+    return res.status(200).json({ beneficiaries: result });
+  } catch (error) {
+    return res.status(500).json({ beneficiaries: error });
+  }
+});
