@@ -20,6 +20,8 @@ export default class CvnApiAdapter {
       room: this._person.classroom.idCal,
       gender: this._person.gender,
       age: getAge(this._person.rut),
+      sign: this._person.sign,
+      dateSign: this._person.dateSign,
     };
   }
 }
