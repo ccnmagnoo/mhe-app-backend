@@ -9,4 +9,4 @@ typings/
 node_modules/
 
 #account configurations
-src/config/
+src/config
