@@ -111,16 +111,21 @@ exports.onCreateSuscription = functions.firestore
     return true;
   });
 
+require('dotenv').config({
+  path: '.env.production',
+});
+
 /**
  * @function mailer nodemailer services to send basic
  * information of activities to suscribed users.
  */
 export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
-  let transporter = nodemailer.createTransport(provider);
+  const prov = provider(process.env.EMAIL_USER, process.env.EMAIL_PASS);
+  let transporter = nodemailer.createTransport(prov);
 
   try {
     let info = await transporter.sendMail({
-      from: `"Equipo Con Buena Energía 💚" <${provider.auth.user}>`, // sender address
+      from: `"Equipo Con Buena Energía 💚" <${prov.auth.user}>`, // sender address
       to: benf.email, // list of receivers
       subject: 'Inscripción Con Buena Energía', // Subject line
       html: emailModel(room, benf), // html body
