@@ -7,7 +7,7 @@ import * as cors from 'cors';
 import { dbKey } from './Tools/databaseKeys';
 import { IBeneficiary, iBeneficiaryConverter } from './Classes/Beneficiary.interface';
 import { IClassroom, iClassroomConverter } from './Classes/Classroom.interface';
-import { provider } from './config/mailProvider';
+import { provider, providerf } from './config/mailProvider';
 import emailModel from './Tools/emailModel';
 
 admin.initializeApp({
@@ -116,7 +116,9 @@ exports.onCreateSuscription = functions.firestore
  * information of activities to suscribed users.
  */
 export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
-  let transporter = nodemailer.createTransport(provider);
+  let transporter = nodemailer.createTransport(
+    providerf(process.env.EMAIL, process.env.PASS)
+  );
 
   try {
     let info = await transporter.sendMail({

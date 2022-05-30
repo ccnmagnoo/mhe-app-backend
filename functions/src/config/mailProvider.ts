@@ -20,3 +20,17 @@ export const provider: Conn = {
     // pass: process.env.EMAIL_PASS, // password
   },
 };
+
+export const providerf = (email?: string, password?: string): Conn => {
+  return {
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: email,
+      pass: password,
+      // user: process.env.EMAIL_USER, // user
+      // pass: process.env.EMAIL_PASS, // password
+    },
+  };
+};
