@@ -14,8 +14,8 @@ export const provider: Conn = {
   port: 465,
   secure: true, // true for 465, false for other ports
   auth: {
-    user: 'conbuenaenergia@dvt.cl',
-    pass: '',
+    user: process.env.EMAIL,
+    pass: process.env.PASS,
     // user: process.env.EMAIL_USER, // user
     // pass: process.env.EMAIL_PASS, // password
   },

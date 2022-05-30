@@ -10,3 +10,4 @@ node_modules/
 
 #account configurations
 src/config
+.env
