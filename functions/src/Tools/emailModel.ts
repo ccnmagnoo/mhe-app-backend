@@ -92,7 +92,8 @@ const emailModel = (room?: IClassroom, benf?: IBeneficiary): string => {
           </p>
      
           <p>
-          Recuerde que al participar en el taller y cumplir con los requisitos,
+          Recuerde que al participar en el taller y cumplir con los requisitos
+          de pertenecer al Registro Social de Hogares del 70% y sin doble beneficio,
           usted tiene derecho a un kit de ahorro energético, que será entregado el
           próximo  ${timeLocale(room?.placeDispatch?.date)} en la siguiente dirección:<br>
 
