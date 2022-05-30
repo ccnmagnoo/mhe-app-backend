@@ -8,9 +8,10 @@ interface Conn {
   secure: boolean;
   auth: { user?: string; pass?: string };
 }
+const smtp = 'smtp-relay.gmail.com';
 
 export const provider: Conn = {
-  host: 'smtp.gmail.com',
+  host: smtp,
   port: 465,
   secure: true, // true for 465, false for other ports
   auth: {
@@ -22,8 +23,9 @@ export const provider: Conn = {
 };
 
 export const providerf = (email?: string, password?: string): Conn => {
+  console.log('provider email', email, password);
   return {
-    host: 'smtp.gmail.com',
+    host: smtp,
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
