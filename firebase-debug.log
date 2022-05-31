@@ -1,0 +1,111 @@
+[debug] [2022-05-31T19:24:14.227Z] ----------------------------------------------------------------------
+[debug] [2022-05-31T19:24:14.229Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions
+[debug] [2022-05-31T19:24:14.229Z] CLI Version:   11.0.1
+[debug] [2022-05-31T19:24:14.229Z] Platform:      win32
+[debug] [2022-05-31T19:24:14.230Z] Node Version:  v16.15.0
+[debug] [2022-05-31T19:24:14.235Z] Time:          Tue May 31 2022 15:24:14 GMT-0400 (hora estándar de Chile)
+[debug] [2022-05-31T19:24:14.236Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-05-31T19:24:14.358Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-05-31T19:24:14.359Z] > authorizing via signed-in user (ccampos@dvt.cl)
+[debug] [2022-05-31T19:24:14.359Z] [iam] checking project myappt51 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-05-31T19:24:14.361Z] > refreshing access token with scopes: []
+[debug] [2022-05-31T19:24:14.362Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-05-31T19:24:14.498Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Tue, 31 May 2022 19:24:10 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-05-31T19:24:14.536Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/myappt51:testIamPermissions [none]
+[debug] [2022-05-31T19:24:14.536Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/myappt51:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-05-31T19:24:15.442Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/myappt51:testIamPermissions 200
+[debug] [2022-05-31T19:24:15.442Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/myappt51:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-05-31T19:24:15.443Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/myappt51/serviceAccounts/myappt51@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-05-31T19:24:15.444Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/myappt51/serviceAccounts/myappt51@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-05-31T19:24:16.302Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/myappt51/serviceAccounts/myappt51@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-05-31T19:24:16.303Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/myappt51/serviceAccounts/myappt51@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'myappt51'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run build
+[info] +  functions: Finished running predeploy script. 
+[debug] [2022-05-31T19:24:24.589Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/myappt51 [none]
+[debug] [2022-05-31T19:24:24.880Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/myappt51 200
+[debug] [2022-05-31T19:24:24.880Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/myappt51 {"projectId":"myappt51","projectNumber":"761028968124","displayName":"mheServices","name":"projects/myappt51","resources":{"hostingSite":"myappt51","realtimeDatabaseInstance":"myappt51","storageBucket":"myappt51.appspot.com","locationId":"southamerica-east1"},"state":"ACTIVE"}
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2022-05-31T19:24:24.882Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/cloudfunctions.googleapis.com [none]
+[debug] [2022-05-31T19:24:24.883Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/runtimeconfig.googleapis.com [none]
+[debug] [2022-05-31T19:24:24.884Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/cloudbuild.googleapis.com [none]
+[debug] [2022-05-31T19:24:24.885Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/artifactregistry.googleapis.com [none]
+[debug] [2022-05-31T19:24:25.960Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/runtimeconfig.googleapis.com 200
+[debug] [2022-05-31T19:24:25.960Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2022-05-31T19:24:25.977Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/cloudfunctions.googleapis.com 200
+[debug] [2022-05-31T19:24:25.977Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/cloudfunctions.googleapis.com [omitted]
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2022-05-31T19:24:26.003Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/artifactregistry.googleapis.com 200
+[debug] [2022-05-31T19:24:26.003Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/artifactregistry.googleapis.com [omitted]
+[debug] [2022-05-31T19:24:26.041Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/cloudbuild.googleapis.com 200
+[debug] [2022-05-31T19:24:26.041Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/myappt51/services/cloudbuild.googleapis.com [omitted]
+[info] +  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2022-05-31T19:24:26.042Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/myappt51/adminSdkConfig [none]
+[debug] [2022-05-31T19:24:26.370Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/myappt51/adminSdkConfig 200
+[debug] [2022-05-31T19:24:26.371Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/myappt51/adminSdkConfig {"projectId":"myappt51","databaseURL":"https://myappt51.firebaseio.com","storageBucket":"myappt51.appspot.com","locationId":"southamerica-east1"}
+[debug] [2022-05-31T19:24:26.371Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/myappt51/configs [none]
+[debug] [2022-05-31T19:24:26.613Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/myappt51/configs 200
+[debug] [2022-05-31T19:24:26.614Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/myappt51/configs {}
+[info] i  functions: preparing codebase default for deployment 
+[debug] [2022-05-31T19:24:26.617Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2022-05-31T19:24:28.809Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "14"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^9.8.0",
+    "firebase-functions": "^3.14.1",
+    "nodemailer": "^6.6.3"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.4",
+    "firebase-functions-test": "^0.2.0",
+    "typescript": "^3.8.0"
+  },
+  "private": true
+}
+[debug] [2022-05-31T19:24:28.809Z] Building nodejs source
+[debug] [2022-05-31T19:24:28.810Z] Failed to validate key PORT: Error: Key PORT is reserved for internal use.
+[error] Error: Failed to load environment variables from .env.:
+[error] - Error Key PORT is reserved for internal use.
+[debug] [2022-05-31T19:25:07.465Z] ----------------------------------------------------------------------
+[debug] [2022-05-31T19:25:07.467Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions
+[debug] [2022-05-31T19:25:07.467Z] CLI Version:   11.0.1
+[debug] [2022-05-31T19:25:07.467Z] Platform:      win32
+[debug] [2022-05-31T19:25:07.467Z] Node Version:  v16.15.0
+[debug] [2022-05-31T19:25:07.468Z] Time:          Tue May 31 2022 15:25:07 GMT-0400 (hora estándar de Chile)
+[debug] [2022-05-31T19:25:07.468Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-05-31T19:25:07.529Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-05-31T19:25:07.530Z] > authorizing via signed-in user (ccampos@dvt.cl)
+[debug] [2022-05-31T19:25:07.530Z] [iam] checking project myappt51 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-05-31T19:25:07.532Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/myappt51:testIamPermissions [none]
+[debug] [2022-05-31T19:25:07.532Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/myappt51:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-05-31T19:25:08.517Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/myappt51:testIamPermissions 200
+[debug] [2022-05-31T19:25:08.517Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/myappt51:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-05-31T19:25:08.517Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/myappt51/serviceAccounts/myappt51@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-05-31T19:25:08.518Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/myappt51/serviceAccounts/myappt51@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-05-31T19:25:09.361Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/myappt51/serviceAccounts/myappt51@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-05-31T19:25:09.361Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/myappt51/serviceAccounts/myappt51@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'myappt51'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run build

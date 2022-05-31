@@ -14,7 +14,7 @@ const port = 587;
 
 export const provider: Conn = {
   host: process.env.SMTP ?? '',
-  port: Number(process.env.PORT) ?? 587,
+  port: Number(process.env.GATE) ?? 587,
   secure: true, // true for 465, false for other ports
   auth: {
     user: process.env.EMAIL,
@@ -33,8 +33,6 @@ export const providerf = (email?: string, password?: string): Conn => {
     auth: {
       user: email,
       pass: password,
-      // user: process.env.EMAIL_USER, // user
-      // pass: process.env.EMAIL_PASS, // password
     },
   };
 };
