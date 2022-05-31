@@ -13,8 +13,8 @@ const smtp = 'smtp-relay.sendinblue.com';
 const port = 587;
 
 export const provider: Conn = {
-  host: smtp,
-  port: port,
+  host: process.env.SMTP ?? '',
+  port: Number(process.env.PORT) ?? 587,
   secure: true, // true for 465, false for other ports
   auth: {
     user: process.env.EMAIL,
