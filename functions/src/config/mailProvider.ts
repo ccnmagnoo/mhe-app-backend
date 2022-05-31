@@ -29,7 +29,7 @@ export const providerf = (email?: string, password?: string): Conn => {
   return {
     host: smtp,
     port: port,
-    secure: true, // true for 465, false for other ports
+    secure: false, // true for 465, false for other ports
     auth: {
       user: email,
       pass: password,
