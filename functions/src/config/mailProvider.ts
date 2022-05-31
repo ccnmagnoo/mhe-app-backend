@@ -8,11 +8,13 @@ interface Conn {
   secure: boolean;
   auth: { user?: string; pass?: string };
 }
-const smtp = 'smtp-relay.gmail.com';
+//https://app-smtp.sendinblue.com/real-time Services Email
+const smtp = 'smtp-relay.sendinblue.com';
+const port = 587;
 
 export const provider: Conn = {
   host: smtp,
-  port: 465,
+  port: port,
   secure: true, // true for 465, false for other ports
   auth: {
     user: process.env.EMAIL,
@@ -26,7 +28,7 @@ export const providerf = (email?: string, password?: string): Conn => {
   console.log('provider email', email, password);
   return {
     host: smtp,
-    port: 465,
+    port: port,
     secure: true, // true for 465, false for other ports
     auth: {
       user: email,
