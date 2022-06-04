@@ -75,7 +75,6 @@ exports.onCreateSuscription = functions.firestore
   .document(`${dbKey.act}/${dbKey.uid}/${dbKey.sus}/{uuid}`)
   .onCreate(async (snapshot, params) => {
     //intance of beneficiary object ✍
-
     console.log('new suscription', params.params.uuid);
     const beneficiary = iBeneficiaryConverter.fromFirestore(snapshot);
 
@@ -88,16 +87,16 @@ exports.onCreateSuscription = functions.firestore
     const room = query.data();
 
     //update enrolled list 🎭
-    if (room !== undefined && room.enrolled.indexOf(beneficiary.uuid) === -1) {
-      room.enrolled.push(beneficiary.uuid);
+    if (room !== undefined && room.enrolled.indexOf(snapshot.id) === -1) {
+      room.enrolled.push(snapshot.id);
       //set new list
       console.log(
         'updated enrolled on',
         room?.idCal,
         ' ✅ new amount: ',
         room?.enrolled.length,
-        '🆔 uuid:',
-        beneficiary.uuid
+        '🆔 social id:',
+        beneficiary.rut
       );
 
       const docRoom = db
