@@ -9,6 +9,7 @@ import { IBeneficiary, iBeneficiaryConverter } from './Classes/Beneficiary.inter
 import { IClassroom, iClassroomConverter } from './Classes/Classroom.interface';
 import { provider, providerf } from './config/mailProvider';
 import emailModel from './Tools/emailModel';
+import getAge from './Tools/getAge';
 
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
@@ -21,8 +22,8 @@ const app = express();
 app.use(cors({ origin: true }));
 app.use(require('./routes/roomReport.routes'));
 exports.app = functions.https.onRequest(app);
-////////////////////////////////CLOUD FUNCTIONS
 
+////////////////////////////////CLOUD FUNCTIONS
 /**
  *  @function onCreateBeneficiary
  *  when ypu create a new beneficiary, classroom object must be uptated
@@ -33,6 +34,7 @@ exports.onCreateConsolidated = functions.firestore
   .onCreate(async (snapshot, params) => {
     //intances of beneficiary object ✍
     console.log('new consolidated', params.params.uuid);
+    //build beneficiary object
     const beneficiary = iBeneficiaryConverter.fromFirestore(snapshot);
 
     //fetch selected classroom 🎬
@@ -59,8 +61,18 @@ exports.onCreateConsolidated = functions.firestore
         .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
         .doc(beneficiary.classroom.uuid);
 
+      //update statistic at room object
+      const add = admin.firestore.FieldValue.increment(1);
+      const genderKey = beneficiary.gender;
+      const ageKey = getAge(beneficiary.rut).group;
+
       //set database
-      await ref.set({ attendees: room?.attendees }, { merge: true });
+      await ref.set(
+        { attendees: room?.attendees, statistics: { [genderKey]: add, [ageKey]: add } },
+        { merge: true }
+      );
+
+      //increment statistics
     }
 
     return true;
