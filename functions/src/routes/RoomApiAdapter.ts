@@ -24,6 +24,7 @@ export default class RoomApiAdapter {
           attendees: room.attendees.length,
           enrolled: room.enrolled.length,
           delivery: room.placeDispatch?.date,
+          statistics: room.statistics,
           uuid: room.uuid,
         };
       }),

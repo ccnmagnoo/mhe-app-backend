@@ -1,6 +1,7 @@
 import { LandType } from './LandType.enum';
 import { IPlace } from './Place.interface';
 import { firebase } from '../index';
+import IStatistic from './Statistic.interface';
 
 export interface IClassroom {
   uuid: string;
@@ -15,6 +16,7 @@ export interface IClassroom {
   colaborator: string;
   land: { type: LandType; name: string };
   vacancies?: number;
+  statistics?: Partial<IStatistic>;
 }
 
 export const iClassroomConverter = {
@@ -47,6 +49,7 @@ export const iClassroomConverter = {
       colaborator: it.colaborator,
       land: { type: it.land.type as LandType, name: it.land.name },
       vacancies: it.vacancies ?? 150,
+      statistics: it.statistics,
     };
   },
 };
