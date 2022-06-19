@@ -19,8 +19,6 @@ export const provider: Conn = {
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
-    // user: process.env.EMAIL_USER, // user
-    // pass: process.env.EMAIL_PASS, // password
   },
 };
 
