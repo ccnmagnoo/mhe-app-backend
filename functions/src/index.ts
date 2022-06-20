@@ -144,4 +144,22 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
   }
 }
 
+exports.onCreateRoom = functions.firestore
+  .document(`${dbKey.act}/${dbKey.uid}/${dbKey.room}/{uuid}`)
+  .onCreate(async (snapshot, params) => {
+    //create expirable pin
+
+    const room = iClassroomConverter.fromFirestore(snapshot);
+    const pin = {
+      expiration: room.placeActivity.date.setHours(
+        room.placeActivity.date.getHours() + 24 //24 hour lifespan after activity
+      ),
+      password: room.idCal.substring(1),
+    };
+
+    const ref = db.collection(`${dbKey.act}/${dbKey.uid}/${dbKey.ext}`).doc();
+
+    return ref.set(pin, { merge: true });
+  });
+
 export { functions as firebase };
