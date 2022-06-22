@@ -6,7 +6,7 @@ import * as nodemailer from 'nodemailer';
 import { dbKey } from './Tools/databaseKeys';
 
 import { IBeneficiary, iBeneficiaryConverter } from './Classes/Beneficiary.interface';
-import { IClassroom, iClassroomConverter } from './Classes/Classroom.interface';
+import { IRoom, IRoomConverter } from './Classes/Classroom.interface';
 import { provider, providerf } from './config/mailProvider';
 import emailModel from './Tools/emailModel';
 import getAge from './Tools/getAge';
@@ -40,7 +40,7 @@ exports.onCreateConsolidated = functions.firestore
     //fetch selected classroom 🎬
     const refRoom = db
       .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
-      .withConverter(iClassroomConverter)
+      .withConverter(IRoomConverter)
       .doc(beneficiary.classroom.uuid);
     const query = await refRoom.get();
     const room = query.data();
@@ -93,7 +93,7 @@ exports.onCreateSuscription = functions.firestore
     //fetch selected classroom
     const refRoom = db
       .collection(`${dbKey.act}/${dbKey.uid}/${dbKey.room}`)
-      .withConverter(iClassroomConverter)
+      .withConverter(IRoomConverter)
       .doc(beneficiary.classroom.uuid);
     const query = await refRoom.get();
     const room = query.data();
@@ -126,7 +126,7 @@ exports.onCreateSuscription = functions.firestore
  * @function mailer nodemailer services to send basic
  * information of activities to suscribed users.
  */
-export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
+export async function mailer(room: IRoom | undefined, benf: IBeneficiary) {
   let transporter = nodemailer.createTransport(
     providerf(process.env.EMAIL, process.env.PASS)
   );
@@ -148,12 +148,15 @@ exports.createCaducousPin = functions.firestore
   .document(`${dbKey.act}/${dbKey.uid}/${dbKey.room}/{uuid}`)
   .onCreate(async (snapshot, params) => {
     //create expirable pin
-    const room = iClassroomConverter.fromFirestore(snapshot);
+    const room = IRoomConverter.fromFirestore(snapshot);
+    //instance object pin
     const pin = {
       expiration: room.placeActivity.date.setHours(
         room.placeActivity.date.getHours() + 24 //24 hour lifespan after activity
       ),
       password: room.idCal.substring(1),
+      operator: room.op?.cur,
+      update: new Date(),
     };
 
     const ref = db.collection(`${dbKey.act}/${dbKey.uid}/${dbKey.ext}`).doc();

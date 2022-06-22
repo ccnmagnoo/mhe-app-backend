@@ -1,9 +1,9 @@
 import { IBeneficiary } from '../Classes/Beneficiary.interface';
-import { IClassroom } from '../Classes/Classroom.interface';
+import { IRoom } from '../Classes/Classroom.interface';
 import getLinkAddress from './getLinkAddress';
 import timeLocale from './timeLocale';
 
-const emailModel = (room?: IClassroom, benf?: IBeneficiary): string => {
+const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
   const happySalutes = [
     'Felicidades',
     'Enhorabuena',

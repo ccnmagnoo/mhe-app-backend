@@ -3,7 +3,7 @@ import { IPlace } from './Place.interface';
 import { firebase } from '../index';
 import IStatistic from './Statistic.interface';
 
-export interface IClassroom {
+export interface IRoom {
   uuid: string;
   idCal: string;
   dateInstance: Date;
@@ -16,16 +16,15 @@ export interface IClassroom {
   colaborator: string;
   land: { type: LandType; name: string };
   vacancies?: number;
+  op?: { uuid?: string; cur?: number };
   statistics?: Partial<IStatistic>;
 }
 
-export const iClassroomConverter = {
-  toFirestore: function (classroom: IClassroom) {
+export const IRoomConverter = {
+  toFirestore: function (classroom: IRoom) {
     return classroom;
   },
-  fromFirestore: function (
-    snapshot: firebase.firestore.QueryDocumentSnapshot
-  ): IClassroom {
+  fromFirestore: function (snapshot: firebase.firestore.QueryDocumentSnapshot): IRoom {
     const it = snapshot.data();
 
     return {
@@ -49,6 +48,7 @@ export const iClassroomConverter = {
       colaborator: it.colaborator,
       land: { type: it.land.type as LandType, name: it.land.name },
       vacancies: it.vacancies ?? 150,
+      op: { uuid: it.op?.uuid, cur: it.op?.cur },
       statistics: it.statistics,
     };
   },

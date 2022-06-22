@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { IClassroom, iClassroomConverter } from '../Classes/Classroom.interface';
+import { IRoom, IRoomConverter } from '../Classes/Classroom.interface';
 import { iPersonConverter } from '../Classes/Person.Interface';
 import RoomApiAdapter from './RoomApiAdapter';
 import { db } from '../index';
@@ -32,12 +32,12 @@ router.get(`/api/rooms`, async (req, res) => {
     //firebase 🔥🔥🔥
     const refRoom = db
       .collection(`${key.act}/${key.uid}/${key.room}`)
-      .withConverter(iClassroomConverter);
+      .withConverter(IRoomConverter);
 
     const query = await refRoom.get();
 
     //building array from query Snapshot
-    const rooms: IClassroom[] = query.docs
+    const rooms: IRoom[] = query.docs
       .map((snapshot) => {
         return snapshot.data();
       })
