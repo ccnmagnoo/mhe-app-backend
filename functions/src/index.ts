@@ -144,11 +144,10 @@ export async function mailer(room: IClassroom | undefined, benf: IBeneficiary) {
   }
 }
 
-exports.onCreateRoom = functions.firestore
+exports.createCaducousPin = functions.firestore
   .document(`${dbKey.act}/${dbKey.uid}/${dbKey.room}/{uuid}`)
   .onCreate(async (snapshot, params) => {
     //create expirable pin
-
     const room = iClassroomConverter.fromFirestore(snapshot);
     const pin = {
       expiration: room.placeActivity.date.setHours(
