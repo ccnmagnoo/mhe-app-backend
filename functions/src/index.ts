@@ -150,10 +150,11 @@ exports.createCaducousPin = functions.firestore
     //create expirable pin
     const room = IRoomConverter.fromFirestore(snapshot);
     //instance object pin
+    room.placeActivity.date.setHours(
+      room.placeActivity.date.getHours() + 24 //24 hour lifespan after activity
+    );
     const pin = {
-      expiration: room.placeActivity.date.setHours(
-        room.placeActivity.date.getHours() + 24 //24 hour lifespan after activity
-      ),
+      expiration: room.placeActivity.date,
       password: room.idCal.substring(1),
       operator: room.op?.cur,
       update: new Date(),
