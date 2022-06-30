@@ -42,7 +42,7 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
     app_card_container: `
       position:relative;
       display: flex;
-      width:min(100%,400px);
+      width:min(100%,600px);
       flex-grow:4;
       flex-shink:2;
       justify-content:space-evenly;
