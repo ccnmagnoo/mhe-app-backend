@@ -50,12 +50,13 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
     `,
     app_card: `
       cursor:pointer;
+      background-color:S;
       padding:3px;
       margin:5px;
       position:relative;
-      max-width:100px;
-      min-height:120px;
-      box-shadow: 2xp 2px 2px 1px rgb(0,0,0,0.1);
+      max-width:120px;
+      min-height:200px;
+      border: 1px solid #C1C5C9;
       border-radius:5px;
       font-size:0.75rem;
       text-aling:justify;
@@ -70,8 +71,8 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
       padding:5px;
       background-color:black;
       border-radius:5px;
-      max-width:30px;
-      max-height:15px;
+      max-width:50px;
+      max-height:20px;
       color:white;
       font-weight:600;
       display:inline;
@@ -148,8 +149,8 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
           de pertenecer al Registro Social de Hogares del 70% y no contar con beneficio previo,
           usted tiene derecho a un kit de ahorro energético, que será entregado el
           próximo  ${timeLocale(room?.placeDispatch?.date)} en la siguiente dirección:<br>
-
           <div>
+
           ${room?.placeDispatch?.name},<br>
           <strong>
           <a href=${getLinkAddress(room?.placeDispatch?.dir)}>${
