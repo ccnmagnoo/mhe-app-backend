@@ -63,7 +63,7 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
       justify-content:center;
     `,
     app_store_button_container: `
-      display:inline;
+      display:flex;
     `,
     app_store_button: `
       margin:5px;
@@ -71,7 +71,7 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
       background-color:black;
       border-radius:5px;
       max-width:30px;
-      max-height:10px;
+      max-height:15px;
       color:white;
       font-weight:600;
       display:inline;
