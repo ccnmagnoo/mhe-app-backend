@@ -25,18 +25,17 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
         font-family:Helvetica,Arial;
         font-size:16px;
         position:relative;
-        background-color:White;
         border-radius:10px;
         border:solid 2px Gray;
         padding:20px;
         margin:5px;
-        max-width:min(50%,600px);
+        max-width:min(80%,600px);
         `,
 
     app_section: `
-    position:relative;
-    padding:10px;
-    justify-content: center;
+      position:relative;
+      padding:10px;
+      justify-content: center;
     `,
 
     app_card_container: `
@@ -48,50 +47,13 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
       justify-content:space-evenly;
 
     `,
-    app_card: `
-      cursor:pointer;
-      background-color:S;
-      padding:3px;
-      margin:5px;
+    store_button_container: `
+      display:block;
       position:relative;
-      max-width:120px;
-      min-height:200px;
-      border: 1px solid #C1C5C9;
-      border-radius:5px;
-      font-size:0.75rem;
-      text-aling:justify;
-      font-color:Gray;
-      justify-content:center;
     `,
-    app_store_button_container: `
-      display:flex;
-    `,
-    app_store_button: `
+    store_button: `
       margin:5px;
-      padding:5px;
-      background-color:black;
-      border-radius:5px;
-      max-width:50px;
-      max-height:20px;
-      color:white;
-      font-weight:600;
-      display:inline;
     `,
-    img_store: `
-      width:15px;
-      height:15px;
-    `,
-    alert: `
-        background:PapayaWhip;
-        padding:10px;
-        margin:auto;
-        max-width:400px;
-        border-radius:20px;
-        border:solid 2px PeachPuff;
-        color:Gray;
-        font-size:0.9rem;
-        text-align:justify;
-        `,
     button_red: `
         cursor:pointer;
         text-decoration:none;
@@ -114,10 +76,108 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
   };
 
   const email = `
+  <head>
+  <style>
+  body{
+    font-family:Helvetica,Arial;
+    font-size:16px;
+    position:relative;
+    padding:20px;
+    margin:5px;
+    max-width:min(80%,600px);
+  }
+  h6{
+    font-size:0.7rem;
+  }
+  h4{
+    font-size:0.8rem;
+  }
+  h3{
+    font-size:0.9rem;
+  }
+  p{
+    color:Gray;
+    font-size:0.8rem;
+    max-width:80%;
+    margin:auto;
+  }
+
+  
+  .app-section{
+    position:relative;
+    padding:10px;
+    justify-content: center;
+    margin:auto;
+  }
+  
+  .card-container{
+    self-align:center;
+    position:relative;
+    display: flex;
+    width:min(100%,600px);
+    flex-grow:4;
+    flex-shink:2;
+    justify-content:space-evenly;
+  }
+  .app-card{
+    position:relative;
+    display:block;
+    justify-content:center;
+    background-color:GhostWhite;
+    padding:5px;
+    margin:5px;
+    position:relative;
+    max-width:120px;
+    min-height:200px;
+    border: 1px solid FloralWhite;
+    border-radius:5px;
+    font-size:0.72rem;
+    text-aling:justify;
+    font-color:Gray;
+    transition:.5s all ease-in-out;
+  }
+
+  .app-card::hover{
+    border: 2px solid Gray;
+  }
+
+  .app-card img{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .app-card p{
+    font-size:0.72rem;
+    text-align:justify;
+
+  }
+  .store-button-container{
+    display:block;
+    position:relative;
+
+  }
+  .store-button:{
+    margin:5px;
+  }
+
+  .alert{
+    background:PapayaWhip;
+    padding:10px;
+    margin:auto;
+    max-width:400px;
+    border-radius:10px;
+    border:solid 1px White;
+    color:Gray;
+    font-size:0.9rem;
+    text-align:justify;
+  }
+
+  </style>
+  </head>
       <body>
       <span style="background-image:url(https://conbuenaenergia.web.app/static/media/cbelogo.abe70d5c.svg);height:100px;background-repeat:no-repeat;"/>
   
-        <div style="${styles.body}"> 
+        <div> 
           <h3>
             Con Buena Energía <br>
             <span style="
@@ -160,7 +220,7 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
           </div>
           </p>
           
-          <p style="${styles.alert}">
+          <p class="alert" >
           <span style="color:Salmon;">¿Qué pasa si no puedo retirar mi kit?</span>
           <br>
           
@@ -170,56 +230,52 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
           
           </p>
 
-          <div style="${styles.app_section}">
+          <div class="app-section">
 
           <h4>¿Quieres aprender más del como ahorrar?</h4>
           <h5>¡Aprende con nuestras apps interactivas 😍!</h5>
 
-            <div style="${styles.app_card_container}">
-              <div style="${styles.app_card}">
+            <div class="card-container">
+
+            <div class="app-card">
                 <img
                   alt="Mi Casa Eficiente"
-                  width="48"
-                  height="48"
+                  width="100"
                   src="https://play-lh.googleusercontent.com/S4wK5irqUb5bncIR6teT1Xg4_b00Sfg5U1YbFb0L5IsN-5HdLS-EbyZxboG1Uq3btOw=w480-h960-rw" 
                 >
-
+                <h6>Mi Casa Eficiente</h6>
                 <p>
                   Juego entretenido donde 
                   pondrás tomar decisiones sustentables 
                   para el buen uso de la energía.
                 </p>
 
-                  <div style="${styles.app_store_button_container}">        
-                    <a style="${styles.app_store_button}" 
+                  <div class="store-button-container">        
+                    <a class="store-button" 
                     href="https://play.google.com/store/apps/details?id=cl.MinEnergia.CasaEficiente&hl=gl&gl=US" 
                     target="_blank"
                     >
-                    <div>
-                    <span styles="background-image:url(https://api.iconify.design/logos/google-play-icon.svg?width=15&height=15);background-repeat:no-repeat;"/>
-                    </div>
-                    <div>Google Play</div> 
+                    <img width="100" alt="Google play" src="https://ci5.googleusercontent.com/proxy/2JVoT023DBhNtS-h3EEs-8Eq6gyZ45-_SU57oZ9eaJUIHuGF_iZpoftrmjUi1wjQ3nYUyGMt8qrETBVCYVwkT-TOszSaGOhAugDFfUIoVLHRR4Rpp_y9O_oLR9mjMg=s0-d-e1-ft#https://s3.amazonaws.com/assets.new.datacamp.com/email/rebrand/google2x.png"> 
                     </a>
 
-                    <a style="${styles.app_store_button}"
+                    <a class="store-button"
                     href="https://apps.apple.com/us/app/mi-casa-eficiente/id1521973518" 
                     target="_blank"
                     >
-                    <div>
-                    <span style="background-image:url(https://api.iconify.design/logos/apple-app-store.svg?width=15&height=15);background-repeat:no-repeat;"/>
-                    </div>
-                    <div>Iphone IOS</div> 
+                    <img width="100" alt="Apple Store" src="https://ci5.googleusercontent.com/proxy/jBP-NWHDH5F021O0oM7F4cg2NJHYEFfz8XXFPTYRlnWMYftIgyKIHzkclI5l8vzhJcA8rKcW4bMFTtufBZaKba7Q6vjtSIAR_lWBcUZqT8f2zhL24F-4qGNOD9ls=s0-d-e1-ft#https://s3.amazonaws.com/assets.new.datacamp.com/email/rebrand/apple2x.png"> 
                     </a>                
                   </div>
             </div>
 
-            <div style="${styles.app_card}">
+            <div class="app-card">
             <img
               alt="Energy Quiz"
-              width="48"
-              height="48"
+              width="10"
               src="https://play-lh.googleusercontent.com/AMGRGB5vD_D_x22vzpxE-t_tGIRHo5D5jbIYYVpekOVFTwMND1e_HMyhi2F1RP3DBs8=w480-h960-rw" 
             >
+            <h6>
+            Energy Quiz
+            </h6>
 
             <p>
             Desafiate a ti mismo o con tus amigos
@@ -227,66 +283,54 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
             obten el máximo puntaje.
             </p>
 
-              <div style="${styles.app_store_button_container}">     
-
-                <a style="${styles.app_store_button}" 
-                href="https://play.google.com/store/apps/details?id=cl.minenergia.EnergyQuiz&hl=es_CL&gl=US" 
-                target="_blank"
+              <div class="store-button-container">        
+                <a class="store-button"
+                  href="https://play.google.com/store/apps/details?id=cl.minenergia.EnergyQuiz&hl=es_CL&gl=US" 
+                  target="_blank"
                 >
-                <div>
-                <span style="background-image:url(https://api.iconify.design/logos/google-play-icon.svg?width=15&height=15);background-repeat:no-repeat;"/>
-                </div>
-                <div>Google Play</div> 
+                <img width="100" alt="Google play" src="https://ci5.googleusercontent.com/proxy/2JVoT023DBhNtS-h3EEs-8Eq6gyZ45-_SU57oZ9eaJUIHuGF_iZpoftrmjUi1wjQ3nYUyGMt8qrETBVCYVwkT-TOszSaGOhAugDFfUIoVLHRR4Rpp_y9O_oLR9mjMg=s0-d-e1-ft#https://s3.amazonaws.com/assets.new.datacamp.com/email/rebrand/google2x.png">
                 </a>
 
-                <a style="${styles.app_store_button}" 
-                href="https://apps.apple.com/cl/app/energy-quiz/id1521973619" 
-                target="_blank"
+                <a class="store-button"
+                  href="https://apps.apple.com/cl/app/energy-quiz/id1521973619" 
+                  target="_blank"
                 >
-                <div>
-                <span style="background-image:url(https://api.iconify.design/logos/apple-app-store.svg?width=15&height=15);background-repeat:no-repeat;"/>
-                </div>
-                <div>Iphone IOS</div>
-               
+                <img width="100" alt="Apple Store" src="https://ci5.googleusercontent.com/proxy/jBP-NWHDH5F021O0oM7F4cg2NJHYEFfz8XXFPTYRlnWMYftIgyKIHzkclI5l8vzhJcA8rKcW4bMFTtufBZaKba7Q6vjtSIAR_lWBcUZqT8f2zhL24F-4qGNOD9ls=s0-d-e1-ft#https://s3.amazonaws.com/assets.new.datacamp.com/email/rebrand/apple2x.png"> 
                 </a>                
               </div>
         </div>
 
-            <div style="${styles.app_card}">
+            <div class="app-card">
 
               <img
                 alt="Explora Tu Energía"
-                width="48px"
-                height="48px"
+                width="100"
                 src="https://play-lh.googleusercontent.com/q5py2ne3MfyW9DgXBx70E3c8Zev9ELfaBp3tBLF_X0f4iuZaD5nqmVw9T_5FpBRWog=w480-h960-rw" 
               >
+              <h6>
+              Explora Tu Energía
+              </h6>
 
               <p>
                 Explora la realidad aumentada.
                 Interactiva, didáctica y futurista.
+                Necesitarás nuestros 
                 <a href="https://www.mienergia.cl/centro-de-recursos/conoce-la-app-de-explora-tu-energia">mapas imprimibles</a>.
               </p>
 
-                <div style="${styles.app_store_button_container}">    
-
-                  <a style="${styles.app_store_button}" 
+                <div class="store-button-container">        
+                <a class="store-button"
                   href="https://play.google.com/store/apps/details?id=cl.minenergia.exploratuenergia&hl=es_419&gl=US" 
                   target="_blank"
                   >
-                  <div>
-                  <span style="background-image:url(https://api.iconify.design/logos/google-play-icon.svg?width=15&height=15);background-repeat:no-repeat;"/>
-                  </div>
-                    <div>Google Play</div> 
+                  <img width="100" alt="Google Play" src="https://ci5.googleusercontent.com/proxy/2JVoT023DBhNtS-h3EEs-8Eq6gyZ45-_SU57oZ9eaJUIHuGF_iZpoftrmjUi1wjQ3nYUyGMt8qrETBVCYVwkT-TOszSaGOhAugDFfUIoVLHRR4Rpp_y9O_oLR9mjMg=s0-d-e1-ft#https://s3.amazonaws.com/assets.new.datacamp.com/email/rebrand/google2x.png"> 
                     </a>
 
-                  <a style="${styles.app_store_button}"
-                  href="https://apps.apple.com/cl/app/explora-tu-energ%C3%ADa/id1494385419" 
-                  target="_blank"
+                  <a class="store-button"
+                    href="https://apps.apple.com/cl/app/explora-tu-energ%C3%ADa/id1494385419" 
+                    target="_blank"
                   >
-                  <div>
-                  <span style="background-image:url(https://api.iconify.design/logos/apple-app-store.svg?width=15&height=15);background-repeat:no-repeat;"/>
-                  </div>
-                    <div>Iphone IOS</div>
+                  <img width="100" alt="Apple Store" src="https://ci5.googleusercontent.com/proxy/jBP-NWHDH5F021O0oM7F4cg2NJHYEFfz8XXFPTYRlnWMYftIgyKIHzkclI5l8vzhJcA8rKcW4bMFTtufBZaKba7Q6vjtSIAR_lWBcUZqT8f2zhL24F-4qGNOD9ls=s0-d-e1-ft#https://s3.amazonaws.com/assets.new.datacamp.com/email/rebrand/apple2x.png">
                     </a>                
                 </div>
             </div>   
