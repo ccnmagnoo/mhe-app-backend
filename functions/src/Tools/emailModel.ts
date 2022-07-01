@@ -95,19 +95,21 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
   h3{
     font-size:0.9rem;
   }
+
   p{
     color:Gray;
     font-size:0.8rem;
-    max-width:80%;
+    max-width:min(600px,90%);
     margin:auto;
+    text-align:justify;
   }
 
-  
   .app-section{
     position:relative;
     padding:10px;
     justify-content: center;
     margin:auto;
+    width:fit-content;
   }
   
   .card-container{
@@ -119,6 +121,7 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
     flex-shink:2;
     justify-content:space-evenly;
   }
+
   .app-card{
     position:relative;
     display:block;
@@ -137,13 +140,21 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
     transition:.5s all ease-in-out;
   }
 
+  #big-date{
+    font-size:1rem;
+    color:RoyalBlue;
+    margin:10px auto;
+    max-width:600px;
+  }
+
   .app-card::hover{
     border: 2px solid Gray;
   }
 
   .app-card img{
-    margin-left:auto;
-    margin-right:auto;
+    margin:0 auto;
+    border-radius:20px;
+
   }
 
   .app-card p{
@@ -156,8 +167,11 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
     position:relative;
 
   }
-  .store-button:{
+  .store-button{
     margin:5px;
+  }
+  .store-button img{
+    border-radius:5px;
   }
 
   .alert{
@@ -168,11 +182,11 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
     border-radius:10px;
     border:solid 1px White;
     color:Gray;
-    font-size:0.9rem;
     text-align:justify;
   }
 
   </style>
+
   </head>
       <body>
       <span style="background-image:url(https://conbuenaenergia.web.app/static/media/cbelogo.abe70d5c.svg);height:100px;background-repeat:no-repeat;"/>
@@ -186,14 +200,15 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
             ">del Ministerio de Energía</span>
           </h3>
 
-          <h4>${randomMessage()} ${benf?.name.firstName}</h4>
+          <h4 >${randomMessage()} ${benf?.name.firstName}</h4>
 
           <p>
           Se ha inscrito existosamente en el taller "Con Buena Energía", realizado en colaboración con  ${
             room?.colaborator ?? 'indefinido'
           } a realizarse el:
           </p>
-          <h2>${timeLocale(room?.placeActivity.date)}</h2>
+
+          <h2 id="big-date">${timeLocale(room?.placeActivity.date)}</h2>
   
           <p>
           Esta fecha deberá dirigirse a la siguiente dirección 👉 
@@ -208,16 +223,17 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
           Recuerde que al participar en el taller y cumplir con los requisitos
           de pertenecer al Registro Social de Hogares del 70% y no contar con beneficio previo,
           usted tiene derecho a un kit de ahorro energético, que será entregado el
-          próximo  ${timeLocale(room?.placeDispatch?.date)} en la siguiente dirección:<br>
-          <div>
+          próximo  ${timeLocale(room?.placeDispatch?.date)} en la siguiente dirección:
+          
+          <br>
+          ${room?.placeDispatch?.name} en
+          <br>
 
-          ${room?.placeDispatch?.name},<br>
           <strong>
-          <a href=${getLinkAddress(room?.placeDispatch?.dir)}>${
-    room?.placeDispatch?.dir
-  }</a>
-            </strong>
-          </div>
+          <a href=${getLinkAddress(room?.placeDispatch?.dir)} 
+          target="_blank">${room?.placeDispatch?.dir}</a>
+          </strong>
+          
           </p>
           
           <p class="alert" >
@@ -240,7 +256,7 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
             <div class="app-card">
                 <img
                   alt="Mi Casa Eficiente"
-                  width="100"
+                  width="80"
                   src="https://play-lh.googleusercontent.com/S4wK5irqUb5bncIR6teT1Xg4_b00Sfg5U1YbFb0L5IsN-5HdLS-EbyZxboG1Uq3btOw=w480-h960-rw" 
                 >
                 <h6>Mi Casa Eficiente</h6>
@@ -270,7 +286,7 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
             <div class="app-card">
             <img
               alt="Energy Quiz"
-              width="10"
+              width="80"
               src="https://play-lh.googleusercontent.com/AMGRGB5vD_D_x22vzpxE-t_tGIRHo5D5jbIYYVpekOVFTwMND1e_HMyhi2F1RP3DBs8=w480-h960-rw" 
             >
             <h6>
@@ -304,7 +320,7 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
 
               <img
                 alt="Explora Tu Energía"
-                width="100"
+                width="80"
                 src="https://play-lh.googleusercontent.com/q5py2ne3MfyW9DgXBx70E3c8Zev9ELfaBp3tBLF_X0f4iuZaD5nqmVw9T_5FpBRWog=w480-h960-rw" 
               >
               <h6>
@@ -312,9 +328,9 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
               </h6>
 
               <p>
-                Explora la realidad aumentada.
+                Explora la energía con realidad aumentada*.
                 Interactiva, didáctica y futurista.
-                Necesitarás nuestros 
+                Para la R.A. puedes usar nuestros 
                 <a href="https://www.mienergia.cl/centro-de-recursos/conoce-la-app-de-explora-tu-energia">mapas imprimibles</a>.
               </p>
 
