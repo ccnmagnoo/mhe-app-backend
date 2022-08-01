@@ -10,6 +10,7 @@ export default function timeLocale(
   format?: 'long' | 'short' | 'onlyDate' | 'onlyTime'
 ): string {
   const t = date ?? new Date(); //on undefined create new Date
+
   const months = [
     'enero',
     'febrero',
@@ -35,7 +36,7 @@ export default function timeLocale(
     MM: t.getMonth() + 1 < 10 ? `0${t.getMonth() + 1}` : (t.getMonth() + 1).toString(),
     yyyy: t.getFullYear(),
     yy: t.getFullYear().toString().slice(2, 4),
-    HH: t.getHours() - 3, //FIXME:wrong utc like +0
+    HH: t.getHours() - 4, //FIXME:wrong utc like +0
     mm: t.getMinutes() < 10 ? `0${t.getMinutes()}` : t.getMinutes().toString(),
   }; //time string set
   const options = {

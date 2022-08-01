@@ -19,6 +19,7 @@ export default class RoomApiAdapter {
           colaborator: room.colaborator,
           cityOnOp: room.cityOnOp,
           province: getCityDetails(room.cityOnOp, LandType.city)?.province,
+          region: getCityDetails(room.cityOnOp, LandType.city)?.region,
           deployLand: room.land.name,
           deployType: room.land.type,
           attendees: room.attendees.length,

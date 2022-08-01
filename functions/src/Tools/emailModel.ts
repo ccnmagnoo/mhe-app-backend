@@ -154,7 +154,6 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
   .app-card img{
     margin:0 auto;
     border-radius:20px;
-
   }
 
   .app-card p{
