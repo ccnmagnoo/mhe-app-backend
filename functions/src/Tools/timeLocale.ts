@@ -36,7 +36,7 @@ export default function timeLocale(
     MM: t.getMonth() + 1 < 10 ? `0${t.getMonth() + 1}` : (t.getMonth() + 1).toString(),
     yyyy: t.getFullYear(),
     yy: t.getFullYear().toString().slice(2, 4),
-    HH: t.getHours() - getTimeZoneOffset(date), //FIXME:wrong utc like +0
+    HH: t.getHours() - getTimeZoneOffset(date),
     mm: t.getMinutes() < 10 ? `0${t.getMinutes()}` : t.getMinutes().toString(),
   }; //time string set
   const options = {
@@ -56,7 +56,7 @@ function getTimeZoneOffset(date?: Date): 3 | 4 {
 
   const savingEnd = new Date(); //daylight saving end es-cl
   savingEnd.setMonth(8); //september
-  savingEnd.setDate(3); //3rd
+  savingEnd.setDate(10); //10th
 
   if (event > savingIni && event < savingEnd) {
     return 4;
