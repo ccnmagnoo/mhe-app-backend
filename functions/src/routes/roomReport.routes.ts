@@ -24,7 +24,9 @@ router.get(`/api/rooms`, async (req, res) => {
     return res.status(500).json({ numberOfRooms: 'wrong api key' });
   if (req.query.year === undefined)
     return res.status(500).json({ numberOfRooms: 'year undefined' });
-
+  if (+(req.query.op ?? 0) < 0 || +(req.query.op ?? 0) > 16) {
+    return res.status(500).json({ numberOfRooms: 'op invalid ,must be between 0..16' });
+  }
   try {
     //defining filter query parameter
     const yearFilter = req.query.year as string;
@@ -32,6 +34,7 @@ router.get(`/api/rooms`, async (req, res) => {
     //firebase 🔥🔥🔥
     const refRoom = db
       .collection(`${key.act}/${key.uid}/${key.room}`)
+      .where('op.cur', '==', +(req.query.op ?? 1))
       .withConverter(IRoomConverter);
 
     const query = await refRoom.get();
