@@ -7,6 +7,7 @@ import { dbKey as key } from './../Tools/databaseKeys';
 import PollApiAdapter from './PollApiAdapter';
 import CvnApiAdapter from './CvnApiAdapter';
 import { iBeneficiaryConverter } from '../Classes/Beneficiary.interface';
+import curList from '../Tools/curList';
 
 const router = Router();
 module.exports = router;
@@ -104,7 +105,9 @@ router.get(`/api/beneficiaries`, async (req, res) => {
    * @api router for powerBI Report of consumptions behaviour
    */
 
-  if (req.query.key !== key.uid) return res.status(500).json({ polls: 'wrong api key' });
+  if (req.query.key !== key.uid) return res.status(500).json({ error: 'wrong api key' });
+  if (curList.some((value) => value !== +(req.query.op ?? 0)))
+    return res.status(500).json({ error: 'op must be between 0-16' });
 
   try {
     //defining filter query parameter
@@ -112,11 +115,23 @@ router.get(`/api/beneficiaries`, async (req, res) => {
     const periodIni = new Date(`${period}/1/1`);
     const periodEnd = new Date(`${period}/12/31`);
 
+    ////require rooms part
+    //firebase 🔥🔥🔥
+    const refRoom = db.collection(`${key.act}/${key.uid}/${key.room}`);
+    const queryRoom = await refRoom
+      .where('placeActivity.date', '>=', periodIni)
+      .where('placeActivity.date', '<=', periodEnd)
+      .where('op.cur', '==', +(req.query.op ?? 0))
+      .withConverter(IRoomConverter)
+      .get();
+
+    const listRoomsKeys = queryRoom.docs.map((room) => room.data().uuid as string);
+
+    ////require beneficiaries part
     //firebase 🔥🔥🔥
     const ref = db.collection(`${key.act}/${key.uid}/${key.cvn}`);
     const query = await ref
-      .where('dateUpdate', '>=', periodIni)
-      .where('dateUpdate', '<=', periodEnd)
+      .where('classroom.uuid', 'in', listRoomsKeys)
       .withConverter(iBeneficiaryConverter)
       .get();
 

@@ -22,6 +22,7 @@ export default class CvnApiAdapter {
       age: getAge(this._person.rut),
       sign: this._person.sign,
       dateSign: this._person.dateSign,
+      email: this._person.email,
     };
   }
 }
