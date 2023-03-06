@@ -21,6 +21,8 @@ router.get(`/api/rooms`, async (req, res) => {
    * @api router for powerBI Report
    */
 
+  // https://us-central1-myappt51.cloudfunctions.net/app/api/rooms?key={}&year=2020&op=5
+
   if (req.query.key !== key.uid)
     return res.status(500).json({ numberOfRooms: 'wrong api key' });
   if (req.query.year === undefined)
@@ -61,7 +63,7 @@ router.get(`/api/rooms`, async (req, res) => {
 });
 
 /**
- * @api get people answered enery poll
+ * @api get people answered energy poll
  */
 router.get(`/api/energypolls`, async (req, res) => {
   //res:https://stackoverflow.com/questions/17007997/how-to-access-the-get-parameters-after-in-express
