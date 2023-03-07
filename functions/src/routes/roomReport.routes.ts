@@ -163,6 +163,69 @@ router.get(`/api/beneficiaries`, async (req, res) => {
   }
 });
 
+router.get(`/api/enrolled`, async (req, res) => {
+  //res:https://stackoverflow.com/questions/17007997/how-to-access-the-get-parameters-after-in-express
+
+  /**
+   * @api router for powerBI Report of consumptions behaviour
+   */
+
+  if (req.query.key !== key.uid) return res.status(500).json({ error: 'wrong api key' });
+  if (!curList.some((value) => value === +(req.query.op ?? 0)))
+    return res.status(500).json({ error: 'op must be between 0-16' });
+  console.log('require api:', req.query.key, 'op:', +(req.query.op ?? 0));
+
+  try {
+    //defining filter query parameter
+    const period = req.query.year as string;
+    const periodIni = new Date(`${period}/1/1`);
+    const periodEnd = new Date(`${period}/12/31`);
+
+    ////require rooms part
+    //firebase 🔥🔥🔥
+    const refRoom = db.collection(`${key.act}/${key.uid}/${key.room}`);
+    const queryRoom = await refRoom
+      //.where('placeActivity.date', '>=', periodIni)
+      //.where('placeActivity.date', '<=', periodEnd)
+      .where('op.cur', '==', +(req.query.op ?? 0))
+      .withConverter(IRoomConverter)
+      .get();
+
+    //filtering room period
+    const listRoomsKeys = queryRoom.docs.map((it) => it.data());
+    const filteredListRooms = listRoomsKeys.filter((it) => {
+      return it.placeActivity.date >= periodIni && it.placeActivity.date <= periodEnd;
+    });
+    console.log('size list of rooms in period:', filteredListRooms.length);
+
+    ////require subscribed part
+    //firebase 🔥🔥🔥
+    const ref = db.collection(`${key.act}/${key.uid}/${key.sus}`);
+    const queryPromises = filteredListRooms.map((room: IRoom) => {
+      return ref
+        .where('classroom.uuid', '==', room.uuid)
+        .withConverter(iBeneficiaryConverter)
+        .get();
+    });
+    const query = await Promise.all(queryPromises);
+    //building array from query Snapshot
+    const result = query.map((snap) => {
+      const query = snap.docs.map((it) => {
+        const data = new CvnApiAdapter(it.data());
+        return data.api;
+      });
+
+      return query;
+    });
+
+    console.log('returning subscribed size', result.length, 'rooms');
+
+    return res.status(200).json({ subscribed: result.flat(1) });
+  } catch (error) {
+    return res.status(500).json({ subscribed: 'no data found', err: error });
+  }
+});
+
 router.get('/api/oneroom', async (req, res) => {
   if (req.query.key !== key.uid) return res.status(500).json({ polls: 'wrong api key' });
   try {
