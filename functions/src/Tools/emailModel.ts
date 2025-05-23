@@ -75,7 +75,7 @@ const emailModel = (room?: IRoom, benf?: IBeneficiary): string => {
     `,
   };
 
-  const email = `
+  const email = /*html*/ `
   <head>
   <style>
   body{
