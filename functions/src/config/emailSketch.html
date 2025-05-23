@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>email modeler</title>
+  </head>
+  <body>
+    <table
+      align="center"
+      class="container"
+      height="100%"
+      width="100%"
+      style="background-color: #ddd"
+    >
+      <tr>
+        <td height="25px">
+          <!-- body separation -->
+        </td>
+      </tr>
+      <tr align="center">
+        <td>
+          <!-- main card content -->
+          <table
+            style="
+              font-size: 0.9rem;
+              font-family: Helvetica, Tahoma, Arial;
+              color: #5e5b5b;
+              width: 378px;
+              background-color: white;
+              border-radius: 8px;
+              padding: 8px;
+            "
+          >
+            <tr>
+              <td>
+                <!-- card margin -->
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <!-- card head -->
+                <table>
+                  <tr>
+                    <td>
+                      <img
+                        style="width: 150px"
+                        src="http://conbuenaenergia.web.app/cbelogo.svg"
+                        alt=""
+                      />
+                    </td>
+                    <td>
+                      <h1 style="font-size: 1.2rem; margin: 0; padding: 0">
+                        registro online
+                      </h1>
+                      <h2
+                        style="
+                          font-size: 0.8rem;
+                          background-color: #555;
+                          color: white;
+                          margin: 0;
+                          font-weight: 400;
+                          padding: 4px 8px;
+                          border-radius: 50px;
+                        "
+                      >
+                        Programa {programa}
+                      </h2>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <!-- card central body -->
+                <p style="text-align: left; font-size: 14px; line-height: 1.5">
+                  {saludo} {name}, te has registrado exitosamente en las actividades de
+                  nuestro programa del <a href="https://energia.gob.cl" rel="noreferrer" target="_blank" style="text-decoration: none;">Ministerio de Energía</a>, a realizar el próximo:
+                  <table width="100%" style="margin: 0; padding: 0;">
+                    <tr align="center"><td><p style="font-size: 1.1rem;font-weight: bold;margin: 0;margin-bottom: 8px;">{fecha actividad}</p></td></tr>
+                    <tr align="center"><td>
+                        <a href="http://to" target="_blank" ref="noreferrer" style="text-decoration: none;"
+                        >
+                        <p style="border-radius: 20px;padding:8px;margin: 0 50px;color: royalblue;border: solid 2px;">en {dirección} 
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                    <path fill="currentColor" d="M8 0a5 5 0 0 0-5 5c0 5 5 11 5 11s5-6 5-11a5 5 0 0 0-5-5m0 8a3 3 0 1 1 0-6a3 3 0 0 1 0 6"/></svg></span></p> 
+                        </a>
+                    </td></tr>
+                  </table>
+                </p>
+                <p>¡No olvides asistir!</p>
+                <p style="font-size:.75rem;color:#777"><strong>Importante</strong>: 
+                    Algunos programas pueden incluir un beneficio, 
+                    que de ser así, el <strong >titular</strong> podrá retirar dicho beneficio el
+                    {fecha}, en {link a lugar}. 
+                    <span style="font-style:italic;"> Si el titular no puede asistir, deberá enviar un representante 
+                    con un <strong>"poder simple"</strong> firmado por el <strong>titular</strong></span></p>
+                <h2 style="font-size: 0.8rem">datos de titular</h2>
+                <table style="font-size: 0.8rem">
+                  <tr>
+                    <td>nombre</td>
+                    <td>{nombre}</td>
+                  </tr>
+                  <tr>
+                    <td>rut</td>
+                    <td>{rut}</td>
+                  </tr>
+                  <tr>
+                    <td>dirección</td>
+                    <td>{dirección},{comuna}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <hr/>
+                footer
+            </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td height="25px">
+          <!-- body separation -->
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
