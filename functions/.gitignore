@@ -9,5 +9,4 @@ typings/
 node_modules/
 
 #account configurations
-src/config
 .env

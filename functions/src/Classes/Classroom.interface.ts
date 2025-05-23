@@ -18,6 +18,7 @@ export interface IRoom {
   vacancies?: number;
   op?: { uuid?: string; cur?: number };
   statistics?: Partial<IStatistic>;
+  program?: string; //social program name
 }
 
 export const IRoomConverter = {
