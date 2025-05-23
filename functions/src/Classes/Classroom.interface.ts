@@ -2,6 +2,7 @@ import { LandType } from './LandType.enum';
 import { IPlace } from './Place.interface';
 import { firebase } from '../index';
 import IStatistic from './Statistic.interface';
+import SocialProgram from './Program';
 
 export interface IRoom {
   uuid: string;
@@ -18,7 +19,7 @@ export interface IRoom {
   vacancies?: number;
   op?: { uuid?: string; cur?: number };
   statistics?: Partial<IStatistic>;
-  program?: string; //social program name
+  program?: SocialProgram; //social program name
 }
 
 export const IRoomConverter = {
@@ -51,6 +52,7 @@ export const IRoomConverter = {
       vacancies: it.vacancies ?? 150,
       op: { uuid: it.op?.uuid, cur: it.op?.cur },
       statistics: it.statistics,
+      program: it.program ?? 'Con Buena Energía',
     };
   },
 };
