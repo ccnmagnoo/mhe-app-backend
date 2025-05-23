@@ -10,6 +10,7 @@ import { IRoom, IRoomConverter } from './Classes/Classroom.interface';
 import { provider, providerf } from './config/mailProvider';
 import emailModel from './Tools/emailModel';
 import getAge from './Tools/getAge';
+import EmailModel from './Classes/EmailModel';
 
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
@@ -117,7 +118,7 @@ exports.onCreateSuscription = functions.firestore
 
       await docRoom.set({ enrolled: room?.enrolled }, { merge: true });
     }
-    await mailer(room, beneficiary);
+    await mailer(room, beneficiary, emailModel);
 
     return true;
   });
@@ -126,7 +127,11 @@ exports.onCreateSuscription = functions.firestore
  * @function mailer nodemailer services to send basic
  * information of activities to suscribed users.
  */
-export async function mailer(room: IRoom | undefined, benf: IBeneficiary) {
+export async function mailer(
+  room: IRoom | undefined,
+  benf: IBeneficiary,
+  email: EmailModel
+) {
   let transporter = nodemailer.createTransport(
     providerf(process.env.EMAIL, process.env.PASS)
   );
@@ -136,7 +141,7 @@ export async function mailer(room: IRoom | undefined, benf: IBeneficiary) {
       from: `"Equipo Con Buena Energía 💚" <${provider.auth.user}>`, // sender address
       to: benf.email, // list of receivers
       subject: 'Inscripción Con Buena Energía', // Subject line
-      html: emailModel(room, benf), // html body
+      html: email(room, benf), // html body
     });
     console.log('mailer', info.accepted);
   } catch (error) {
