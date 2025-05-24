@@ -8,7 +8,7 @@ import { dbKey } from './Tools/databaseKeys';
 import { IBeneficiary, iBeneficiaryConverter } from './Classes/Beneficiary.interface';
 import { IRoom, IRoomConverter } from './Classes/Classroom.interface';
 import { provider, providerf } from './config/mailProvider';
-import emailModel from './Tools/emailModel';
+import emailModel from './Tools/emailModelDyn';
 import getAge from './Tools/getAge';
 import EmailModel from './Classes/EmailModel';
 

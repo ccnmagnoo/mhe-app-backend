@@ -2,7 +2,7 @@ import { LandType } from './LandType.enum';
 import { IPlace } from './Place.interface';
 import { firebase } from '../index';
 import IStatistic from './Statistic.interface';
-import SocialProgram from './Program';
+import { SocialProgram } from './Program';
 
 export interface IRoom {
   uuid: string;
