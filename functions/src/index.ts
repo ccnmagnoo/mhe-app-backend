@@ -155,7 +155,7 @@ export async function mailer(
           style="background-color: #4c74afff !important; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;"
           target="_blank"
           rel="noopener nonreferrer"
-          > ver dirección</a>
+          >ver dirección</a>
       <br/>
       <p><strong>¡Le esperamos!</strong></p>
       <h3>Equipo ${room?.program}🫶</h3>
