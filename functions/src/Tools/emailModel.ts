@@ -203,7 +203,7 @@ const emailModel: EmailModel = (room?: IRoom, benf?: IBeneficiary): string => {
           <h4 >${randomMessage()} ${benf?.name.firstName}</h4>
 
           <p>
-          Se ha inscrito existosamente en el taller "Con Buena Energía", realizado en colaboración con  ${
+          Se ha inscrito exitosamente en el taller "Con Buena Energía", realizado en colaboración con  ${
             room?.colaborator ?? 'indefinido'
           } a realizarse el:
           </p>

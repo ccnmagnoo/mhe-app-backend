@@ -11,6 +11,8 @@ import { provider, providerf } from './config/mailProvider';
 import emailModel from './Tools/emailModelDyn';
 import getAge from './Tools/getAge';
 import EmailModel from './Classes/EmailModel';
+import timeLocale from './Tools/timeLocale';
+import getLinkAddress from './Tools/getLinkAddress';
 
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
@@ -138,10 +140,29 @@ export async function mailer(
 
   try {
     let info = await transporter.sendMail({
-      from: `"Equipo Con Buena Energía 💚" <${provider.auth.user}>`, // sender address
+      from: `"Equipo ${room?.program} 💚" <${provider.auth.user}>`, // sender address
       to: benf.email, // list of receivers
-      subject: 'Inscripción Con Buena Energía', // Subject line
-      html: email(room, benf), // html body
+      subject: `Inscripción ${room?.program}`, // Subject line
+      // html: email(room, benf), // html body
+      /*html*/
+      html: `<h1>registro ${room?.program}</h1> 
+      <h3 style="color:#4c74afff">confirmado👍</h3>
+      <p>no olvide asistir a la actividad el próximo</p>
+      <p>${timeLocale(room?.placeActivity.date)}</p>
+      <p>con la siguiente dirección:</p>
+      <p>${room?.placeActivity.name},${room?.placeActivity.dir}</p>
+      <a href=${getLinkAddress(room?.placeActivity.dir)}
+          style="background-color: #4c74afff !important; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;"
+          target="_blank"
+          rel="noopener nonreferrer"
+          > ver dirección</a>
+      <br/>
+      <p><strong>¡Le esperamos!</strong></p>
+      <h3>Equipo ${room?.program}🫶</h3>
+      <p>${
+        room?.program
+      } es un programa del <a href="https://www.energia.gob.cl/" target="_blank" rel="noopener nonreferrer">Ministerio de Energía</a></p>
+      `,
     });
     console.log('mailer', info.accepted);
   } catch (error) {
