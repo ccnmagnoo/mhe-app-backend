@@ -192,26 +192,24 @@ exports.createCaducousPin = functions.firestore
     return ref.set(pin, { merge: true });
   });
 
-exports.modifyCaducousPin = functions.firestore
+exports.updateCaducousPin = functions.firestore
   .document(`${dbKey.act}/${dbKey.uid}/${dbKey.room}/{uuid}`)
-  .onUpdate(async (change, context) => {
+  .onUpdate(async (snapshot, params) => {
     //create expirable pin
-    const room = IRoomConverter.fromFirestore(change.after);
+    const room = IRoomConverter.fromFirestore(snapshot.after);
     //instance object pin
-    const expiration = new Date(room.placeActivity.date);
-    expiration.setHours(
-      expiration.getHours() + 24 //24 hour lifespan after activity
+    room.placeActivity.date.setHours(
+      room.placeActivity.date.getHours() + 24 //24 hour lifespan after activity
     );
-    const pin_uuid = room.uuid;
     const pin = {
-      expiration: expiration,
+      expiration: room.placeActivity.date,
       password: room.idCal.substring(1),
       operator: room.op?.cur,
       update: new Date(),
       room_uuid: room.uuid,
     };
 
-    const ref = db.collection(`${dbKey.act}/${dbKey.uid}/${dbKey.ext}`).doc(pin_uuid);
+    const ref = db.collection(`${dbKey.act}/${dbKey.uid}/${dbKey.ext}`).doc(room.uuid);
 
     return ref.set(pin, { merge: true });
   });
