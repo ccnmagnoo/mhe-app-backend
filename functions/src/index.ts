@@ -184,9 +184,32 @@ exports.createCaducousPin = functions.firestore
       password: room.idCal.substring(1),
       operator: room.op?.cur,
       update: new Date(),
+      room_uuid: room.uuid,
     };
 
-    const ref = db.collection(`${dbKey.act}/${dbKey.uid}/${dbKey.ext}`).doc();
+    const ref = db.collection(`${dbKey.act}/${dbKey.uid}/${dbKey.ext}`).doc(room.uuid);
+
+    return ref.set(pin, { merge: true });
+  });
+
+exports.updateCaducousPin = functions.firestore
+  .document(`${dbKey.act}/${dbKey.uid}/${dbKey.room}/{uuid}`)
+  .onUpdate(async (snapshot, params) => {
+    //create expirable pin
+    const room = IRoomConverter.fromFirestore(snapshot.after);
+    //instance object pin
+    room.placeActivity.date.setHours(
+      room.placeActivity.date.getHours() + 24 //24 hour lifespan after activity
+    );
+    const pin = {
+      expiration: room.placeActivity.date,
+      password: room.idCal.substring(1),
+      operator: room.op?.cur,
+      update: new Date(),
+      room_uuid: room.uuid,
+    };
+
+    const ref = db.collection(`${dbKey.act}/${dbKey.uid}/${dbKey.ext}`).doc(room.uuid);
 
     return ref.set(pin, { merge: true });
   });
