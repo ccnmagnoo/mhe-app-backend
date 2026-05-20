@@ -23,6 +23,7 @@ export default class CvnApiAdapter {
       sign: this._person.sign,
       dateSign: this._person.dateSign,
       email: this._person.email,
+      isIndigenous: this._person.isIndigenous,
       uuidRoom: this._person.classroom.uuid,
     };
   }

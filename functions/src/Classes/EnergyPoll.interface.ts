@@ -25,5 +25,5 @@ type ResiliencePoll = {
 
 type InputSubscription = Partial<EnergyPoll> & Partial<ResiliencePoll>;
 
-export { IEnergyPoll };
+export { IEnergyPoll, ResiliencePoll };
 export type { InputSubscription, RiskZone };

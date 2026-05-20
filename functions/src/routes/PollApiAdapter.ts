@@ -15,6 +15,12 @@ export default class PollApiAdapter {
       electricity: this._person.energy?.electricity,
       gasBill: this._person.energy?.gasBill,
       gasDuration: this._person.energy?.gasDuration,
+      isIndigenous: this._person.isIndigenous,
+      inRiskZone: this._person.resilience?.is_risk_zone,
+      riskZone: this._person.resilience?.is_risk_zone,
+      energyCut: this._person.resilience?.energy_cut,
+      emergencyContact: this._person.resilience?.emergency_contact,
+      damageExperience: this._person.resilience?.damage_experience,
     };
   }
 }

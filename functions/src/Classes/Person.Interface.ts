@@ -1,5 +1,5 @@
 import { firebase } from '../index';
-import { IEnergyPoll } from './EnergyPoll.interface';
+import { IEnergyPoll, ResiliencePoll } from './EnergyPoll.interface';
 
 export interface IPerson {
   uuid: string;
@@ -10,8 +10,10 @@ export interface IPerson {
   dateUpdate: Date;
   email: string;
   phone?: string | null;
+  isIndigenous?: boolean | null;
   address?: Dir;
   energy?: IEnergyPoll;
+  resilience?: ResiliencePoll;
 }
 
 export type Name = {
@@ -50,8 +52,10 @@ export const iPersonConverter = {
       dateUpdate: it.dateUpdate.toDate(),
       email: it.email,
       phone: it.phone,
+      isIndigenous: it.isIndigenous,
       address: it.address,
       energy: it.energy,
+      resilience: it.resilience,
     };
   },
 };
